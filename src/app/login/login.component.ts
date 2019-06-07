@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Usuario, Sesion } from '../lib/crashify_pb';
 import { TransitoClient } from '../lib/crashify_pb_service';
+import { LoginService } from '../services/login.service';
+
 
 @Component({
   selector: 'app-login',
@@ -14,7 +16,9 @@ export class LoginComponent implements OnInit {
   private email: string;
   private password: string;
 
-  constructor() {
+  constructor(
+    private loginService: LoginService,
+  ) {
     this.email = '';
     this.password = '';
     this.loginForm = new FormGroup({
@@ -26,21 +30,20 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  onIniciarSesion(view) {
-    console.log("holis prro");
-    const client = new TransitoClient('http://localhost:8080', null);
-    const sesion = new Sesion();
-
-    sesion.setUsuario(this.email);
-    sesion.setPassword(this.password);
-
-    client.iniciarSesion(sesion, (err, usuario) => {
-      if (usuario == null) {
-        console.log(err);
-      } else {
-        alert(usuario.getNombre());
-      }
-    });
+  async onIniciarSesion(view) {
+    if (this.loginForm.valid) {
+      console.log('Holis prro...')
+      this.loginService.iniciarSesion(this.email, this.password)
+        .then((res: Usuario) => {
+          if (res != null) {
+            alert(res.getNombre());
+          } else {
+            alert("Datos incorrectos");
+          }
+        })
+    } else {
+      alert("Campos incmpletos");
+    }
   }
 
   public cerrarSesion(): void {
