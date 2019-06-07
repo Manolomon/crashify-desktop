@@ -4,7 +4,7 @@ git submodule update --init --recursive
 
 cd crashify-server
 
-git pull
+git pull origin master
 
 cd ..
 
