@@ -1,0 +1,140 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+
+$custom-primary-color: (
+    50 : #e0f2f1,
+    100 : #b3e0db,
+    200 : #80cbc4,
+    300 : #4db6ac,
+    400 : #26a69a,
+    500 : #009688,
+    600 : #008e80,
+    700 : #008375,
+    800 : #00796b,
+    900 : #006858,
+    A100 : #97ffec,
+    A200 : #64ffe3,
+    A400 : #31ffda,
+    A700 : #18ffd5,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$custom-accent-color: (
+    50 : #fff8e1,
+    100 : #ffecb5,
+    200 : #ffe083,
+    300 : #ffd451,
+    400 : #ffca2c,
+    500 : #ffc107,
+    600 : #ffbb06,
+    700 : #ffb305,
+    800 : #ffab04,
+    900 : #ff9e02,
+    A100 : #ffffff,
+    A200 : #fffaf2,
+    A400 : #ffe4bf,
+    A700 : #ffd9a6,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$custom-warn: (
+    0 : #ffebe4,
+    100 : #ffcdbd,
+    200 : #ffab91,
+    300 : #ff8964,
+    400 : #ff7043,
+    500 : #ff5722,
+    600 : #ff4f1e,
+    700 : #ff4619,
+    800 : #ff3c14,
+    900 : #ff2c0c,
+    A100 : #ffffff,
+    A200 : #fff7f6,
+    A400 : #ffc9c3,
+    A700 : #ffb2a9,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$crashify-test-primary: mat-palette($custom-primary-color);
+$crashify-test-accent: mat-palette($custom-accent-color, 500, 900, A100);
+
+// The warn palette is optional (defaults to red).
+$crashify-test-warn: mat-palette($custom-warn, 500);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$crashify-test-theme: mat-light-theme($crashify-test-primary, $crashify-test-accent, $crashify-test-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($crashify-test-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { 
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: 'Open Sans', Roboto, "Helvetica Neue", sans-serif; 
+}

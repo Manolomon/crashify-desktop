@@ -1,0 +1,45 @@
+<div class="bg">
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <p style="color: #47485D">Iniciar Sesión</p>
+      <span class="example-spacer"></span>
+
+      <mat-icon class="example-icon" style="color: #47485D">account_circle</mat-icon>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <content>
+    <form novalidate [formGroup]="loginForm" (ngSubmit)="onIniciarSesion(formNew)" #formNew="ngForm" fxLayout="column"
+      fxFlexFill fxFlexAlign="center center" fxLayoutAlign="center center">
+      <div fxFlexFill fxFlexAlign="center center" fxLayoutAlign="center center">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <br>
+            <!-- <img style="padding-top: 1em; padding-right: 1em" src="../assets/title.png" alt="Product-Icon" /> -->
+          </mat-card-header>
+          <mat-card-content>
+            <br>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="7px" fxLayoutGap.sm="0px">
+              <mat-form-field fxFlex appearance="outline">
+                <mat-label>Correo Electrónico</mat-label>
+                <input formControlName="emailControl" [(ngModel)]="email" type="email" name="titulo" matInput
+                  required />
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="7px" fxLayoutGap.sm="0px">
+              <mat-form-field fxFlex appearance="outline">
+                <mat-label>Contraseña</mat-label>
+                <input formControlName="passwordControl" [(ngModel)]="password" type="password" name="titulo" matInput
+                  required />
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="7px" fxLayoutGap.sm="0px">
+              <button type="submit" style="width: 100%" mat-raised-button color="primary" layout-fill
+                class="btn btn-primary">Acceder</button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </form>
+  </content>
+</div>
