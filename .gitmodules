@@ -1,0 +1,3 @@
+[submodule "crashify-server"]
+	path = crashify-server
+	url = https://github.com/Deklok/crashify-server
