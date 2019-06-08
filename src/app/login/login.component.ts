@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Usuario, Sesion } from '../lib/crashify_pb';
-import { TransitoClient } from '../lib/crashify_pb_service';
+import { TransitoClient, ServiceError } from '../lib/crashify_pb_service';
 import { LoginService } from '../services/login.service';
 
 
@@ -28,22 +28,31 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    localStorage.clear();
   }
 
   async onIniciarSesion(view) {
     if (this.loginForm.valid) {
       console.log('Holis prro...')
-      this.loginService.iniciarSesion(this.email, this.password)
+      await this.loginService.iniciarSesion(this.email, this.password)
         .then((res: Usuario) => {
-          if (res != null) {
+          if (res.getUsuario() != null) {
+            localStorage.setItem("usuario", JSON.stringify(res));
             alert(res.getNombre());
-          } else {
-            alert("Datos incorrectos");
           }
         })
+        .catch((err: ServiceError) => {
+          if (err.code == 2) { //Si regresó null la consulta
+            alert("Datos incorrectos");
+          } else if (err.code == 14) { //Si no hay conexión con el servidor
+            alert("Error de conexión con el servidor");
+          }
+        });
     } else {
-      alert("Campos incmpletos");
+      alert("Campos incompletos");
     }
+    let usuarioPrueba = this.loginService.getCurrentUser();
+    console.log(usuarioPrueba);
   }
 
   public cerrarSesion(): void {

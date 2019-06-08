@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Usuario, Sesion } from '../lib/crashify_pb';
-import { TransitoClient } from '../lib/crashify_pb_service';
+import { TransitoClient, ServiceError } from '../lib/crashify_pb_service';
 import { resolve } from 'url';
 import { reject } from 'q';
 
@@ -33,6 +33,15 @@ export class LoginService {
         }
       });
     })
-
   }
+
+  getCurrentUser() {
+    let user: Usuario = JSON.parse(localStorage.getItem("usuario"));
+    return user;
+  }
+
+  isLogged() {
+    return JSON.parse(localStorage.getItem("usuario")) != null;
+  }
+
 }
