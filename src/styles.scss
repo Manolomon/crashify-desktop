@@ -17,26 +17,26 @@
 // hue. Available color palettes: https://material.io/design/color/
 
 $custom-primary-color: (
-    50 : #e0f2f1,
-    100 : #b3e0db,
-    200 : #80cbc4,
-    300 : #4db6ac,
-    400 : #26a69a,
-    500 : #009688,
-    600 : #008e80,
-    700 : #008375,
-    800 : #00796b,
-    900 : #006858,
-    A100 : #97ffec,
-    A200 : #64ffe3,
-    A400 : #31ffda,
-    A700 : #18ffd5,
+    50 : #e0f7ef,
+    100 : #b3ecd7,
+    200 : #80dfbd,
+    300 : #4dd2a3,
+    400 : #26c88f,
+    500 : #00be7b,
+    600 : #00b873,
+    700 : #00af68,
+    800 : #00a75e,
+    900 : #00994b,
+    A100 : #c4ffdd,
+    A200 : #91ffbf,
+    A400 : #5effa2,
+    A700 : #45ff93,
     contrast: (
         50 : #000000,
         100 : #000000,
         200 : #000000,
         300 : #000000,
-        400 : #ffffff,
+        400 : #000000,
         500 : #ffffff,
         600 : #ffffff,
         700 : #ffffff,
@@ -138,3 +138,39 @@ body {
     margin: 0;
     font-family: 'Open Sans', Roboto, "Helvetica Neue", sans-serif; 
 }
+
+.notifier__notification--info {
+	background-color: #8cacfc;
+	color: #324B89;
+
+	.notifier__notification-button-icon {
+		fill: #324B89;
+	}
+}
+
+.notifier__notification--success {
+	background-color: #76E298;
+	color: #2B8A49;
+
+	.notifier__notification-button-icon {
+		fill: #2B8A49;
+	}
+}
+
+.notifier__notification--warning {
+	background-color: #FEDC98;
+	color: #A2803C;
+
+	.notifier__notification-button-icon {
+		fill: #A2803C;
+	}
+}
+
+.notifier__notification--error {
+	background-color: #FEA2A2;
+	color: #A24646;
+
+	.notifier__notification-button-icon {
+		fill: #A24646;
+	}
+}                                                                                           

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NotifierService } from 'angular-notifier';
 import { Usuario, Sesion } from '../lib/crashify_pb';
 import { TransitoClient, ServiceError } from '../lib/crashify_pb_service';
 import { LoginService } from '../services/login.service';
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
+    private notifier: NotifierService,
   ) {
     this.email = '';
     this.password = '';
@@ -38,25 +40,26 @@ export class LoginComponent implements OnInit {
         .then((res: Usuario) => {
           if (res.getUsuario() != null) {
             localStorage.setItem("usuario", JSON.stringify(res));
-            alert(res.getNombre());
+            this.notifier.notify("info", res.getNombre());
+            console.log(res.getNombre());
           }
         })
         .catch((err: ServiceError) => {
-          if (err.code == 2) { //Si regresó null la consulta
-            alert("Datos incorrectos");
-          } else if (err.code == 14) { //Si no hay conexión con el servidor
-            alert("Error de conexión con el servidor");
+          if (err.code === 2) { //Si regresó null la consulta
+            this.notifier.notify("warning","Datos incorrectos");
+          } else if (err.code === 14) { //Si no hay conexión con el servidor
+            this.notifier.notify("error","Error de conexión con el servidor");
           }
         });
     } else {
-      alert("Campos incompletos");
+      this.notifier.notify("warning","Campos incompletos");
     }
     let usuarioPrueba = this.loginService.getCurrentUser();
     console.log(usuarioPrueba);
   }
 
   public cerrarSesion(): void {
-    console.log('Cerrar sesión')
+    console.log('Cerrar sesión');
   }
 
 }

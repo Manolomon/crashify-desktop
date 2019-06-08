@@ -11,6 +11,8 @@
 /dist
 /tmp
 /out-tsc
+/electron/dist
+
 # Only exists if Bazel was run
 /bazel-out
 
