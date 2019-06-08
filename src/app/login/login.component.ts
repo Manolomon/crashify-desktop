@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NotifierService } from 'angular-notifier';
 import { Usuario, Sesion } from '../lib/crashify_pb';
 import { TransitoClient, ServiceError } from '../lib/crashify_pb_service';
 import { LoginService } from '../services/login.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 
@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
+    private router: Router,
     private toastr: ToastrService,
   ) {
     this.email = '';
@@ -36,24 +37,23 @@ export class LoginComponent implements OnInit {
 
   async onIniciarSesion(view) {
     if (this.loginForm.valid) {
-      console.log('Holis prro...')
       await this.loginService.iniciarSesion(this.email, this.password)
         .then((res: Usuario) => {
           if (res.getUsuario() != null) {
-            localStorage.setItem("usuario", JSON.stringify(res));
-            this.toastr.success("Conexion exitosa", "success");
-            console.log(res.getNombre());
+            localStorage.setItem('usuario', JSON.stringify(res));
+            this.toastr.success('Conexion exitosa', 'success');
+            this.router.navigate(['menu']);
           }
         })
         .catch((err: ServiceError) => {
-          if (err.code === 2) { //Si regresó null la consulta
-            this.toastr.warning("Datos incorrectos", "Warning");
-          } else if (err.code === 14) { //Si no hay conexión con el servidor
-            this.toastr.error("Error de conexión", "error");
+          if (err.code === 2) { // Si regresó null la consulta
+            this.toastr.warning('Datos incorrectos', 'Warning');
+          } else if (err.code === 14) { // Si no hay conexión con el servidor
+            this.toastr.error('Error de conexión', 'error');
           }
         });
     } else {
-      this.toastr.warning("Campos incompletos", "warning");
+      this.toastr.warning('Campos incompletos', 'warning');
     }
     let usuarioPrueba = this.loginService.getCurrentUser();
     console.log(usuarioPrueba);

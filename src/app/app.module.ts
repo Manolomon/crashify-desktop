@@ -5,61 +5,22 @@ import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NotifierModule, NotifierOptions } from 'angular-notifier';
+import { ToastrModule, Toast } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
+
+import { LoginComponent } from './login/login.component';
 import { MenuComponent } from './menu/menu.component';
+import { ReportesComponent } from './reportes/reportes.component';
 
-import { ToastrModule, Toast } from 'ngx-toastr';
-
-const customNotifierOptions: NotifierOptions = {
-  position: {
-    horizontal: {
-      position: "left",
-      distance: 12
-    },
-    vertical: {
-      position: "bottom",
-      distance: 12,
-      gap: 10
-    }
-  },
-  theme: "material",
-  behaviour: {
-    autoHide: 5000,
-    onClick: "hide",
-    onMouseover: "pauseAutoHide",
-    showDismissButton: true,
-    stacking: 4
-  },
-  animations: {
-    enabled: true,
-    show: {
-      preset: "slide",
-      speed: 300,
-      easing: "ease"
-    },
-    hide: {
-      preset: "fade",
-      speed: 300,
-      easing: "ease",
-      offset: 50
-    },
-    shift: {
-      speed: 300,
-      easing: "ease"
-    },
-    overlap: 150
-  }
-};
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    MenuComponent
+    MenuComponent,
+    ReportesComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +30,6 @@ const customNotifierOptions: NotifierOptions = {
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    NotifierModule.withConfig(customNotifierOptions),
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
       { path: 'menu', component: MenuComponent },
