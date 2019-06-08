@@ -13,6 +13,8 @@ import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
 
+import { ToastrModule, Toast } from 'ngx-toastr';
+
 const customNotifierOptions: NotifierOptions = {
   position: {
     horizontal: {
@@ -70,7 +72,13 @@ const customNotifierOptions: NotifierOptions = {
     NotifierModule.withConfig(customNotifierOptions),
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
+      { path: 'menu', component: MenuComponent },
     ]),
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

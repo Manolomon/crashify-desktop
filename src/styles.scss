@@ -1,10 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 
-@import '~@angular/material/theming';
+@import "~@angular/material/theming";
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -16,103 +15,105 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 
+@import "~ngx-toastr/toastr.css";
+
 $custom-primary-color: (
-    50 : #e0f7ef,
-    100 : #b3ecd7,
-    200 : #80dfbd,
-    300 : #4dd2a3,
-    400 : #26c88f,
-    500 : #00be7b,
-    600 : #00b873,
-    700 : #00af68,
-    800 : #00a75e,
-    900 : #00994b,
-    A100 : #c4ffdd,
-    A200 : #91ffbf,
-    A400 : #5effa2,
-    A700 : #45ff93,
-    contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #000000,
-        400 : #000000,
-        500 : #ffffff,
-        600 : #ffffff,
-        700 : #ffffff,
-        800 : #ffffff,
-        900 : #ffffff,
-        A100 : #000000,
-        A200 : #000000,
-        A400 : #000000,
-        A700 : #000000,
-    )
+  50: #e0f7ef,
+  100: #b3ecd7,
+  200: #80dfbd,
+  300: #4dd2a3,
+  400: #26c88f,
+  500: #00be7b,
+  600: #00b873,
+  700: #00af68,
+  800: #00a75e,
+  900: #00994b,
+  A100: #c4ffdd,
+  A200: #91ffbf,
+  A400: #5effa2,
+  A700: #45ff93,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
 );
 
 $custom-accent-color: (
-    50 : #fff8e1,
-    100 : #ffecb5,
-    200 : #ffe083,
-    300 : #ffd451,
-    400 : #ffca2c,
-    500 : #ffc107,
-    600 : #ffbb06,
-    700 : #ffb305,
-    800 : #ffab04,
-    900 : #ff9e02,
-    A100 : #ffffff,
-    A200 : #fffaf2,
-    A400 : #ffe4bf,
-    A700 : #ffd9a6,
-    contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #000000,
-        400 : #000000,
-        500 : #000000,
-        600 : #000000,
-        700 : #000000,
-        800 : #000000,
-        900 : #000000,
-        A100 : #000000,
-        A200 : #000000,
-        A400 : #000000,
-        A700 : #000000,
-    )
+  50: #fff8e1,
+  100: #ffecb5,
+  200: #ffe083,
+  300: #ffd451,
+  400: #ffca2c,
+  500: #ffc107,
+  600: #ffbb06,
+  700: #ffb305,
+  800: #ffab04,
+  900: #ff9e02,
+  A100: #ffffff,
+  A200: #fffaf2,
+  A400: #ffe4bf,
+  A700: #ffd9a6,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
 );
 
 $custom-warn: (
-    0 : #ffebe4,
-    100 : #ffcdbd,
-    200 : #ffab91,
-    300 : #ff8964,
-    400 : #ff7043,
-    500 : #ff5722,
-    600 : #ff4f1e,
-    700 : #ff4619,
-    800 : #ff3c14,
-    900 : #ff2c0c,
-    A100 : #ffffff,
-    A200 : #fff7f6,
-    A400 : #ffc9c3,
-    A700 : #ffb2a9,
-    contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #000000,
-        400 : #000000,
-        500 : #000000,
-        600 : #ffffff,
-        700 : #ffffff,
-        800 : #ffffff,
-        900 : #ffffff,
-        A100 : #000000,
-        A200 : #000000,
-        A400 : #000000,
-        A700 : #000000,
-    )
+  0: #ffebe4,
+  100: #ffcdbd,
+  200: #ffab91,
+  300: #ff8964,
+  400: #ff7043,
+  500: #ff5722,
+  600: #ff4f1e,
+  700: #ff4619,
+  800: #ff3c14,
+  900: #ff2c0c,
+  A100: #ffffff,
+  A200: #fff7f6,
+  A400: #ffc9c3,
+  A700: #ffb2a9,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
 );
 
 $crashify-test-primary: mat-palette($custom-primary-color);
@@ -122,7 +123,11 @@ $crashify-test-accent: mat-palette($custom-accent-color, 500, 900, A100);
 $crashify-test-warn: mat-palette($custom-warn, 500);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$crashify-test-theme: mat-light-theme($crashify-test-primary, $crashify-test-accent, $crashify-test-warn);
+$crashify-test-theme: mat-light-theme(
+  $crashify-test-primary,
+  $crashify-test-accent,
+  $crashify-test-warn
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -131,46 +136,47 @@ $crashify-test-theme: mat-light-theme($crashify-test-primary, $crashify-test-acc
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { 
-    height: 100%;
+html,
+body {
+  height: 100%;
 }
 body {
-    margin: 0;
-    font-family: 'Open Sans', Roboto, "Helvetica Neue", sans-serif; 
+  margin: 0;
+  font-family: "Open Sans", Roboto, "Helvetica Neue", sans-serif;
 }
 
 .notifier__notification--info {
-	background-color: #8cacfc;
-	color: #324B89;
+  background-color: #8cacfc;
+  color: #324b89;
 
-	.notifier__notification-button-icon {
-		fill: #324B89;
-	}
+  .notifier__notification-button-icon {
+    fill: #324b89;
+  }
 }
 
 .notifier__notification--success {
-	background-color: #76E298;
-	color: #2B8A49;
+  background-color: #76e298;
+  color: #2b8a49;
 
-	.notifier__notification-button-icon {
-		fill: #2B8A49;
-	}
+  .notifier__notification-button-icon {
+    fill: #2b8a49;
+  }
 }
 
 .notifier__notification--warning {
-	background-color: #FEDC98;
-	color: #A2803C;
+  background-color: #fedc98;
+  color: #a2803c;
 
-	.notifier__notification-button-icon {
-		fill: #A2803C;
-	}
+  .notifier__notification-button-icon {
+    fill: #a2803c;
+  }
 }
 
 .notifier__notification--error {
-	background-color: #FEA2A2;
-	color: #A24646;
+  background-color: #fea2a2;
+  color: #a24646;
 
-	.notifier__notification-button-icon {
-		fill: #A24646;
-	}
-}                                                                                           
+  .notifier__notification-button-icon {
+    fill: #a24646;
+  }
+}

@@ -4,6 +4,7 @@ import { NotifierService } from 'angular-notifier';
 import { Usuario, Sesion } from '../lib/crashify_pb';
 import { TransitoClient, ServiceError } from '../lib/crashify_pb_service';
 import { LoginService } from '../services/login.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
-    private notifier: NotifierService,
+    private toastr: ToastrService,
   ) {
     this.email = '';
     this.password = '';
@@ -40,19 +41,19 @@ export class LoginComponent implements OnInit {
         .then((res: Usuario) => {
           if (res.getUsuario() != null) {
             localStorage.setItem("usuario", JSON.stringify(res));
-            this.notifier.notify("info", res.getNombre());
+            this.toastr.success("Conexion exitosa", "success");
             console.log(res.getNombre());
           }
         })
         .catch((err: ServiceError) => {
           if (err.code === 2) { //Si regresó null la consulta
-            this.notifier.notify("warning","Datos incorrectos");
+            this.toastr.warning("Datos incorrectos", "Warning");
           } else if (err.code === 14) { //Si no hay conexión con el servidor
-            this.notifier.notify("error","Error de conexión con el servidor");
+            this.toastr.error("Error de conexión", "error");
           }
         });
     } else {
-      this.notifier.notify("warning","Campos incompletos");
+      this.toastr.warning("Campos incompletos", "warning");
     }
     let usuarioPrueba = this.loginService.getCurrentUser();
     console.log(usuarioPrueba);
