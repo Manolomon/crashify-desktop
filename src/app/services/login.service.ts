@@ -36,12 +36,16 @@ export class LoginService {
   }
 
   getCurrentUser() {
-    let user: Usuario = JSON.parse(localStorage.getItem("usuario"));
+    let user: Usuario = JSON.parse(sessionStorage.getItem("usuario"));
     return user;
   }
 
   isLogged() {
-    return JSON.parse(localStorage.getItem("usuario")) != null;
+    return JSON.parse(sessionStorage.getItem("usuario")) != null;
+  }
+
+  cerrarSesion() {
+    sessionStorage.removeItem("usuario");
   }
 
 }

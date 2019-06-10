@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Usuario } from '../lib/crashify_pb';
 
 @Component({
   selector: 'app-reportes',

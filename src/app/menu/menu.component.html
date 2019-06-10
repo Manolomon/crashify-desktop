@@ -16,13 +16,14 @@
                     <mat-icon mat-list-icon>account_circle</mat-icon>
                     <div fxLayout="column" fxLayoutGap="-30px" fxFlex="80" position="absolute" top="0" right="0">
                         <div fxLayout="column" fxLayoutGap="-16px" fxFlex="80">
-                            <p>Manolo Pérez</p><!-- Nombre del Usuario -->
-                            <small style="color: #a9adcc">Administrador</small> <!-- Tipo del Usuario -->
+                            <p>{{usuario.getNombre()}}</p><!-- Nombre del Usuario -->
+                            <small *ngIf="usuario.getRol()==1" style="color: #a9adcc">Administrador</small> <!-- Tipo del Usuario -->
+                            <small *ngIf="usuario.getRol()==2" style="color: #a9adcc">Perito</small> <!-- Tipo del Usuario -->
                         </div>
                     </div>
                 </mat-list-item>
             </mat-list>
-            <button mat-button><u>Cerrar Sesión</u></button>
+            <button mat-button type="button" (click)="onCerrarSesion()"><u>Cerrar Sesión</u></button>
         </div>
         <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
             <mat-icon>menu</mat-icon>

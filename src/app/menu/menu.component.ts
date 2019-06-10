@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
+import { Usuario } from '../lib/crashify_pb';
+import { Router, ActivatedRoute } from '@angular/router';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +10,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  private usuarioObjeto;
+  private usuario: Usuario = new Usuario();
+  private loginServicio: LoginService = new LoginService();
+  private route: ActivatedRoute;
+
+  constructor(
+    private router: Router,
+  ) {
+  }
 
   ngOnInit() {
+    this.usuarioObjeto = JSON.parse(sessionStorage.getItem("usuario"));
+    this.usuario.setIdusuario(this.usuarioObjeto.id);
+    this.usuario.setNombre(this.usuarioObjeto.nombre);
+    this.usuario.setPassword(this.usuarioObjeto.password);
+    this.usuario.setRol(this.usuarioObjeto.rol);
+    this.usuario.setUsuario(this.usuarioObjeto.usuario);
+    console.log(this.usuario.getNombre());
+  }
+
+  public onCerrarSesion(): void {
+    this.loginServicio.cerrarSesion();
+    this.router.navigate(['login']);
   }
 
 }

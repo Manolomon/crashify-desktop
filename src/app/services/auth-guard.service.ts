@@ -14,6 +14,7 @@ export class AuthGuardService {
 
   canActivate(): boolean {
     if (!this.loginService.isLogged()) {
+      this.router.navigate(['/']);
       return false;
     }
     console.log("Puede acceder");

@@ -33,16 +33,16 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     localStorage.clear();
+    sessionStorage.clear();
   }
 
   async onIniciarSesion(view) {
     if (this.loginForm.valid) {
       await this.loginService.iniciarSesion(this.email, this.password)
         .then((res: Usuario) => {
-          if (res.getUsuario() != null) {
-            localStorage.setItem('usuario', JSON.stringify(res));
+          if (res.getUsuario != null) {
+            sessionStorage.setItem('usuario', JSON.stringify(res.toObject()));
             this.toastr.success('Conexion exitosa', 'success');
-            this.router.navigate(['menu']);
           }
         })
         .catch((err: ServiceError) => {
@@ -55,8 +55,7 @@ export class LoginComponent implements OnInit {
     } else {
       this.toastr.warning('Campos incompletos', 'warning');
     }
-    let usuarioPrueba = this.loginService.getCurrentUser();
-    console.log(usuarioPrueba);
+    this.router.navigate(['menu']);
   }
 
   public cerrarSesion(): void {
