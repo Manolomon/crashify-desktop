@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     this.email = '';
     this.password = '';
     this.loginForm = new FormGroup({
-      emailControl: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      emailControl: new FormControl('', [Validators.required, Validators.minLength(2)]),
       passwordControl: new FormControl('', Validators.required),
     });
   }
@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
       await this.loginService.iniciarSesion(this.email, this.password)
         .then((res: Usuario) => {
           if (res.getUsuario != null) {
+            console.log(res.toObject());
             sessionStorage.setItem('usuario', JSON.stringify(res.toObject()));
             this.toastr.success('Conexion exitosa', 'success');
           }
