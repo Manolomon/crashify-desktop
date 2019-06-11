@@ -17,8 +17,10 @@
                     <div fxLayout="column" fxLayoutGap="-30px" fxFlex="80" position="absolute" top="0" right="0">
                         <div fxLayout="column" fxLayoutGap="-16px" fxFlex="80">
                             <p>{{usuario.getNombre()}}</p><!-- Nombre del Usuario -->
-                            <small *ngIf="usuario.getRol()==1" style="color: #a9adcc">Perito</small> <!-- Tipo del Usuario -->
-                            <small *ngIf="usuario.getRol()==2" style="color: #a9adcc">Administrador</small> <!-- Tipo del Usuario -->
+                            <small *ngIf="usuario.getRol()==1" style="color: #a9adcc">Perito</small>
+                            <!-- Tipo del Usuario -->
+                            <small *ngIf="usuario.getRol()==2" style="color: #a9adcc">Administrador</small>
+                            <!-- Tipo del Usuario -->
                         </div>
                     </div>
                 </mat-list-item>

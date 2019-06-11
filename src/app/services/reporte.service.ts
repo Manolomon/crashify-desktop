@@ -38,16 +38,16 @@ export class ReporteService {
     });
   }
 
-  dictaminarReporteUnificado(dictamen: Dictamen) {
-    return new Promise((resolve, reject) => {
-      this.client.dictaminarReporteUnificado(dictamen, (err, respuesta) => {
-        if (respuesta != null) {
-          resolve(respuesta);
-        } else {
-          reject(err);
-        }
-      });
-    })
-  }
+  //dictaminarReporteUnificado(dictamen: Dictamen) {
+  //  return new Promise((resolve, reject) => {
+  //    this.client.dictaminarReporteUnificado(dictamen, (err, respuesta) => {
+  //      if (respuesta != null) {
+  //        resolve(respuesta);
+  //      } else {
+  //        reject(err);
+  //      }
+  //    });
+  //  })
+  //}
 
 }
