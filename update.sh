@@ -1,10 +1,14 @@
 #!/bin/bash
 
+echo "\e[96mActualizando submodulos...\e[0m"
+
 cd crashify-server
 
 git pull origin master
 
 cd ..
+
+echo "\e[96mGenerando Protos...\e[0m"
 
 mkdir -p src/app/lib
 
@@ -16,3 +20,5 @@ protoc \
     --js_out="import_style=commonjs,binary:${OUT_DIR}" \
     --ts_out="service=true:${OUT_DIR}" \
     crashify.proto
+
+echo "\e[92mFinalizado\e[0m"

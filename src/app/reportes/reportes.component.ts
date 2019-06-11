@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import {SelectionModel} from '@angular/cdk/collections';
 import { Usuario } from '../lib/crashify_pb';
 import { MatSort, MatTableDataSource } from '@angular/material';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 export interface Reporte {
@@ -34,12 +35,24 @@ export class ReportesComponent implements OnInit {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
+  isLinear = false;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+
   displayedColumns: string[] = ['select', 'autor', 'hora', 'ciudad', 'estatus', 'id'];
   dataSource = new MatTableDataSource<Reporte>(DUMMY);
   selection = new SelectionModel<Reporte>(true, []);
 
+  constructor(private _formBuilder: FormBuilder) {}
+
   ngOnInit() {
     this.dataSource.sort = this.sort;
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
