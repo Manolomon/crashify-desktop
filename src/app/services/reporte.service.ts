@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Usuario, Sesion, ListaUsuarios, ID, Respuesta, Mensaje, ListaReportes, Dictamen } from '../lib/crashify_pb';
+import { Usuario, Sesion, ListaUsuarios, ID, Respuesta, Mensaje, ListaReportes, Dictamen, DictamenUnificado } from '../lib/crashify_pb';
 import { TransitoClient } from '../lib/crashify_pb_service';
 
 @Injectable({
@@ -38,7 +38,7 @@ export class ReporteService {
     });
   }
 
-  dictaminarReporteUnificado(dictamen: Dictamen) {
+  dictaminarReporteUnificado(dictamen: DictamenUnificado) {
     return new Promise((resolve, reject) => {
       this.client.dictaminarReporteUnificado(dictamen, (err, respuesta) => {
         if (respuesta != null) {
