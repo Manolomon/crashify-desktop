@@ -9,19 +9,20 @@ export interface Reporte {
   id: number;
   autor: string;
   ciudad: string;
+  estatus: string;
 }
 
 const DUMMY: Reporte[] = [
-  {id: 1, hora: '10:45', autor: 'Manolo Pérez', ciudad: 'Xalapa'},
-  {id: 1, hora: '10:46', autor: 'Manolo Pérez', ciudad: 'Xalapa'},
-  {id: 3, hora: '12:56', autor: 'Benji Somur', ciudad: 'Banderilla'},
-  {id: 2, hora: '11:43', autor: 'Daniel Escamilla', ciudad: 'Veracruz'},
-  {id: 5, hora: '15:34', autor: 'Mario Moreno', ciudad: 'Guadalajara'},
-  {id: 6, hora: '16:23', autor: 'Santa Claus', ciudad: 'North Pole'},
-  {id: 4, hora: '14:54', autor: 'John Wick', ciudad: 'New York'},
-  {id: 4, hora: '14:55', autor: 'McLovin', ciudad: 'Hawai'},
-  {id: 8, hora: '20:14', autor: 'Homer J. Simpson', ciudad: 'Springfield'},
-  {id: 3, hora: '13:00', autor: 'Sheldon J. Plankton', ciudad: 'Bikini Button'},
+  {id: 1, hora: '10:45', autor: 'Manolo Pérez', ciudad: 'Xalapa', estatus: 'Dictaminado'},
+  {id: 1, hora: '10:46', autor: 'Manolo Pérez', ciudad: 'Xalapa', estatus: 'Pendiente'},
+  {id: 3, hora: '12:56', autor: 'Benji Somur', ciudad: 'Banderilla', estatus: 'Dictaminado'},
+  {id: 2, hora: '11:43', autor: 'Daniel Escamilla', ciudad: 'Veracruz', estatus: 'Pendiente'},
+  {id: 5, hora: '15:34', autor: 'Mario Moreno', ciudad: 'Guadalajara', estatus: 'Dictaminado'},
+  {id: 6, hora: '16:23', autor: 'Santa Claus', ciudad: 'North Pole', estatus: 'Dictaminado'},
+  {id: 4, hora: '14:54', autor: 'John Wick', ciudad: 'New York', estatus: 'Dictaminado'},
+  {id: 4, hora: '14:55', autor: 'McLovin', ciudad: 'Hawai', estatus: 'Pendiente'},
+  {id: 8, hora: '20:14', autor: 'Homer J. Simpson', ciudad: 'Springfield', estatus: 'Dictaminado'},
+  {id: 3, hora: '13:00', autor: 'Sheldon J. Plankton', ciudad: 'Bikini Button', estatus: 'Pendiente'},
 ];
 
 @Component({
@@ -33,7 +34,7 @@ export class ReportesComponent implements OnInit {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  displayedColumns: string[] = ['select', 'autor', 'hora', 'ciudad', 'id'];
+  displayedColumns: string[] = ['select', 'autor', 'hora', 'ciudad', 'estatus', 'id'];
   dataSource = new MatTableDataSource<Reporte>(DUMMY);
   selection = new SelectionModel<Reporte>(true, []);
 
