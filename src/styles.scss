@@ -144,39 +144,3 @@ body {
   margin: 0;
   font-family: "Open Sans", Roboto, "Helvetica Neue", sans-serif;
 }
-
-.notifier__notification--info {
-  background-color: #8cacfc;
-  color: #324b89;
-
-  .notifier__notification-button-icon {
-    fill: #324b89;
-  }
-}
-
-.notifier__notification--success {
-  background-color: #76e298;
-  color: #2b8a49;
-
-  .notifier__notification-button-icon {
-    fill: #2b8a49;
-  }
-}
-
-.notifier__notification--warning {
-  background-color: #fedc98;
-  color: #a2803c;
-
-  .notifier__notification-button-icon {
-    fill: #a2803c;
-  }
-}
-
-.notifier__notification--error {
-  background-color: #fea2a2;
-  color: #a24646;
-
-  .notifier__notification-button-icon {
-    fill: #a24646;
-  }
-}
