@@ -19,6 +19,7 @@ import { Usuario, Sesion } from './lib/crashify_pb';
 import { ReporteComponent } from './reportes/reporte/reporte.component';
 import { AdminComponent } from './admin/admin.component';
 import { UsuarioComponent } from './admin/usuario/usuario.component';
+import { DialogoComponent } from './dialogo/dialogo.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { UsuarioComponent } from './admin/usuario/usuario.component';
     ReportesComponent,
     ReporteComponent,
     AdminComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    DialogoComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +51,9 @@ import { UsuarioComponent } from './admin/usuario/usuario.component';
     }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    DialogoComponent
+  ]
 })
 export class AppModule { }

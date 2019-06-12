@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Atención</h1>
+<div mat-dialog-content>
+  <p>{{data.mensaje}}</p>
+</div>
+<div mat-dialog-actions>
+  <button *ngIf="data.dobleBoton" mat-button (click)="clickCancelar()">Cancelar</button>
+  <button mat-button (click)="clickAceptar()" cdkFocusInitial>Aceptar</button>
+</div>

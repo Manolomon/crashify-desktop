@@ -3,6 +3,7 @@ import { Usuario, Sesion } from '../lib/crashify_pb';
 import { TransitoClient, ServiceError } from '../lib/crashify_pb_service';
 import { resolve } from 'url';
 import { reject } from 'q';
+import * as sha256 from 'js-sha256';
 
 @Injectable({
   providedIn: 'root'
@@ -19,14 +20,14 @@ export class LoginService {
     const sesion = new Sesion();
 
     sesion.setUsuario(email);
-    sesion.setPassword(password);
+    sesion.setPassword(sha256.sha256(password));
 
     console.log("Comienza inicio de sesión")
 
     return new Promise((resolve, reject) => {
       this.client.iniciarSesion(sesion, (err, usuario: Usuario) => {
         if (usuario != null) {
-          console.log("Iniciado sesion")
+          console.log(usuario)
           resolve(usuario);
         } else {
           reject(err);

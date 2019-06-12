@@ -1,125 +1,37 @@
 <mat-divider></mat-divider>
 <br />
-<form novalidate [formGroup]="capituloForm" (ngSubmit)="onGuardarCapitulo(formNew)" #formNew="ngForm" fxLayout="column">
+<form novalidate [formGroup]="usuarioForm" (ngSubmit)="onGuardarUsuario(formNew)" #formNew="ngForm" fxLayout="column">
   <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="7px" fxLayoutGap.sm="0px">
     <mat-form-field fxFlex appearance="outline">
-      <mat-label>Título del Capítulo</mat-label>
-      <input formControlName="tituloControl" [(ngModel)]="capitulo.titulo" name="titulo" matInput required />
+      <mat-label>Nombre Completo</mat-label>
+      <input formControlName="nombreControl" [(ngModel)]="usuarioTemp.nombre" name="nombre" matInput required />
     </mat-form-field>
     <mat-form-field fxFlex appearance="outline">
-      <mat-label>Título del Libro</mat-label>
-      <input formControlName="tituloLibroControl" [(ngModel)]="capitulo.tituloLibro" name="tituloLibro" matInput
-        required />
-    </mat-form-field>
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="7px" fxLayoutGap.sm="0px">
-      <mat-form-field fxFlex appearance="outline">
-        <mat-label>ISBN</mat-label>
-        <input formControlName="isbnControl" [(ngModel)]="capitulo.isbn" name="isbn" matInput required />
-      </mat-form-field>
-      <mat-form-field fxFlex appearance="outline">
-        <mat-label>Año</mat-label>
-        <input formControlName="yearControl" [(ngModel)]="capitulo.year" name="year" matInput required />
-      </mat-form-field>
-      <mat-form-field fxFlex appearance="outline">
-        <mat-label>Edición</mat-label>
-        <input formControlName="edicionControl" [(ngModel)]="capitulo.numEdicion" name="numEdicion" matInput required />
-      </mat-form-field>
-    </div>
-  </div>
-  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="7px" fxLayoutGap.sm="0px">
-    <mat-form-field fxFlex appearance="outline">
-      <mat-label>Propósito</mat-label>
-      <input formControlName="propositoControl" [(ngModel)]="capitulo.proposito" name="proposito" matInput required />
-    </mat-form-field>
-    <mat-form-field fxFlex appearance="outline">
-      <mat-label>Línea de Generación</mat-label>
-      <mat-select formControlName="lineaGeneracionControl" [(ngModel)]="capitulo.lineaGeneracion" name="lineaGeneracion"
-        required>
-        <mat-option *ngFor="let linea of lgac" [value]="linea">{{ linea }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <section class="example-section">
-      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="7px" fxLayoutGap.sm="0px">
-        <button type="button" mat-raised-button color="primary" (click)="fileInput.click()"
-          [disabled]="capituloForm.disabled">
-          Evidencia
-          <mat-icon>create_new_folder</mat-icon>
-        </button>
-        <input hidden type="file" #fileInput (change)="detectarArchivos($event)" accept="application/pdf" />
-        <mat-progress-spinner *ngIf="cargaDeArchivo > 0" fxFlex [color]="color" [mode]="determinate"
-          [value]="cargaDeArchivo" [diameter]="40" style="padding-right: 10px">
-        </mat-progress-spinner>
-      </div>
-    </section>
-  </div>
-  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="7px" fxLayoutGap.sm="0px">
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="7px" fxLayoutGap.sm="0px">
-      <mat-form-field fxFlex appearance="outline">
-        <mat-label>Editorial</mat-label>
-        <input formControlName="editorialControl" [(ngModel)]="capitulo.editorial" name="editorial" matInput required />
-      </mat-form-field>
-      <mat-form-field fxFlex appearance="outline">
-        <mat-label>País</mat-label>
-        <input formControlName="paisControl" [(ngModel)]="capitulo.pais" name="pais" matInput required />
-      </mat-form-field>
-    </div>
-    <mat-form-field fxFlex appearance="outline">
-      <mat-label>Colaboradores</mat-label>
-      <mat-select [formControl]="colaboradoresControl" multiple [(ngModel)]="colaboradoresSeleccionados"
-        name="colaboradores">
-        <mat-option *ngFor="let colaborador of colaboradoresLista" [value]="colaborador">{{ colaborador }}</mat-option>
-      </mat-select>
-      <mat-icon matSuffix class="icon-color">supervised_user_circle</mat-icon>
-    </mat-form-field>
-    <mat-form-field fxFlex appearance="outline">
-      <mat-label>Estado</mat-label>
-      <mat-select formControlName="estadoControl" [(ngModel)]="capitulo.estado" name="estado" required>
-        <mat-option value="publicado">Publicado</mat-option>
-        <mat-option value="terminado">Terminado</mat-option>
-        <mat-option value="en_proceso">En Proceso</mat-option>
+      <mat-label>Cargo</mat-label>
+      <mat-select formControlName="cargoControl" [(ngModel)]="usuarioTemp.rol" name="cargo" required>
+        <mat-option value="1">Perito</mat-option>
+        <mat-option value="2">Administrativo</mat-option>
+        <mat-option value="3">Soporte</mat-option>
+        <mat-option value="4">Atención</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
   <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="7px" fxLayoutGap.sm="0px">
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="7px" fxLayoutGap.sm="0px">
-      <mat-form-field fxFlex appearance="outline">
-        <mat-label>Página Inicio</mat-label>
-        <input formControlName="pagInicioControl" type="number" min="0" step="1" [(ngModel)]="capitulo.paginaInicio"
-          name="paginaInicio" matInput required />
-      </mat-form-field>
-      <mat-form-field fxFlex appearance="outline">
-        <mat-label>Página Final</mat-label>
-        <input formControlName="pagFinalControl" type="number" min="0" step="1" [(ngModel)]="capitulo.paginaFinal"
-          name="paginaFinal" matInput required />
-      </mat-form-field>
-    </div>
     <mat-form-field fxFlex appearance="outline">
-      <mat-label>Colaboradores Externos</mat-label>
-      <mat-select [formControl]="colaboradoresExternosControl" [(ngModel)]="capitulo.colaboradoresExternos" multiple>
-        <mat-option *ngFor="let externo of colaboradoresExternos" [value]="externo">{{
-          externo
-        }}</mat-option>
-      </mat-select>
-      <mat-icon matSuffix class="icon-color">supervised_user_circle</mat-icon>
+      <mat-label>Usuario</mat-label>
+      <input formControlName="usernameControl" [(ngModel)]="usuarioTemp.username" name="username" matInput required />
     </mat-form-field>
-    <section class="example-section">
-      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="7px" fxLayoutGap.sm="0px">
-        <button type="button" mat-raised-button color="primary" [disabled]="capituloForm.disabled" (click)="agregarColaborador()">
-          <mat-icon>group_add</mat-icon>
-        </button>
-      </div>
-    </section>
-    <section class="example-section">
-      <mat-checkbox [(ngModel)]="capitulo.consideradoPCA" (change)="onChange()" class="example-margin" color="primary"
-        formControlName="btnConsideradoControl">
-        Considerar para Cuerpo Académico
-      </mat-checkbox>
-    </section>
+    <mat-form-field fxFlex appearance="outline">
+      <mat-label>Contraseña</mat-label>
+      <input formControlName="passwordControl" name="password" matInput placeholder="Dejar vacío para conservar contraseña actual" [type]="hide ? 'password' : 'text'">
+      <mat-icon matSuffix class="icon-color" (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
+      </mat-icon>
+    </mat-form-field>
   </div>
   <div fxLayout="row" fxLayoutAlign="end center">
     <div class="example-button-row">
       <button type="button" mat-stroked-button color="primary" (click)="cancelarEdicion()">Cancelar</button>
-      <button type="submit" mat-raised-button color="primary" [disabled]="capituloForm.disabled">Guardar</button>
+      <button type="submit" mat-raised-button color="primary" [disabled]="usuarioForm.disabled">Guardar</button>
     </div>
   </div>
 </form>

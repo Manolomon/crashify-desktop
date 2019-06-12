@@ -16,8 +16,8 @@
   </div>
   <div fxLayout="row" fxLayoutAlign="end center">
     <button type="button" mat-raised-button color="primary">
-      <mat-icon>create_new_folder</mat-icon>
-      Agregar Usuario
+      <mat-icon>person_add</mat-icon>
+      &nbsp;&nbsp;Agregar Usuario
     </button>
   </div>
   <mat-divider class="br_div"></mat-divider>
@@ -27,30 +27,42 @@
 </div>
 <div fxFlexAlign="center" fxLayoutAlign="center center">
   <mat-accordion style="width: 80%" class="example-headers-align" flex>
-    <mat-expansion-panel class="hideOption">
+    <mat-expansion-panel [expanded]="indexExpanded == i" (opened)="indexExpanded = i" (afterExpand)="indexExpanded = i"
+      (closed)="togglePanels(-1)" *ngFor="let user of usuarios; let i = index">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <p class="p-title-limit">Nombre</p>
+          <p class="p-title-limit">{{user.getNombre()}}</p>
         </mat-panel-title>
         <mat-panel-description>
           <mat-chip-list>
-            <mat-chip color="primary" selected>
-              Rol
+            <mat-chip color="primary" selected *ngIf="user.getRol() === 1">
+              Perito
+            </mat-chip>
+            <mat-chip color="accent" selected *ngIf="user.getRol() == 2">
+              Administrador
+            </mat-chip>
+            <mat-chip selected *ngIf="user.getRol() === 3">
+              Soporte
+            </mat-chip>
+            <mat-chip selected *ngIf="user.getRol() === 4">
+              Atención
             </mat-chip>
           </mat-chip-list>
           <!-- TODO -->
           <div class="example-icon">
-            <button mat-icon-button
+            <button *ngIf="indexExpanded == i" (click)="habilitarCampos(); togglePanels(i)" mat-icon-button
               matTooltip="Editar" matTooltipPosition="above">
               <mat-icon aria-label="Edit Button">edit</mat-icon>
             </button>
-            <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above">
+            <button (click)="eliminarProducto(i)" mat-icon-button *ngIf="indexExpanded == i" matTooltip="Eliminar"
+              matTooltipPosition="above">
               <mat-icon aria-label="Delete Button">delete</mat-icon>
             </button>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <app-usuario></app-usuario>
+      <app-usuario (recargarUsuarios)="recargarUsuarios($event)" (edicionCancelada)="edicionCancelada($event)" [usuarioObjeto]="user" [habilitaCampos]="camposHabilitados"
+      [eliminarProducto]="eliminaProducto"></app-usuario>
     </mat-expansion-panel>
   </mat-accordion>
 </div>

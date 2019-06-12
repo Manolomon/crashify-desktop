@@ -58,7 +58,6 @@ export class LoginComponent implements OnInit {
             this.toastr.error('Error de conexión', 'error');
           }
         });
-      
     } else {
       this.toastr.warning('Campos incompletos', 'warning');
     }

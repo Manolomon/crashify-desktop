@@ -59,7 +59,6 @@ export class ReportesComponent implements OnInit {
   }
 
   async obtenerReportes() {
-    console.log('Haciendo cosas');
     await this.reporteService.obtenerReportes()
       .then((res: ListaReportes) => {
         if (res.getReportesList() != null) {
