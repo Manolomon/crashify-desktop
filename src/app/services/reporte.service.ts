@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Usuario, Sesion, ListaUsuarios, ID, Respuesta, Mensaje, ListaReportes, Dictamen, DictamenUnificado, Reporte, ListaID } from '../lib/crashify_pb';
+import {
+  Usuario, Sesion, ListaUsuarios, ID,
+  Respuesta, Mensaje, ListaReportes, Dictamen,
+  DictamenUnificado, Reporte, ListaID
+} from '../lib/crashify_pb';
 import { TransitoClient, ServiceError } from '../lib/crashify_pb_service';
+import { HereService } from './here.service'
 
 @Injectable({
   providedIn: 'root'
@@ -8,17 +13,27 @@ import { TransitoClient, ServiceError } from '../lib/crashify_pb_service';
 export class ReporteService {
 
   private client: TransitoClient;
-  constructor() {
+  constructor(
+    private here: HereService
+  ) {
     this.client = new TransitoClient('http://localhost:8080', null);
   }
 
   obtenerReportes() {
     let msg: Mensaje = new Mensaje();
+    let locations: Array<any>;
+    let position = '19.497247,-96.8887211';
     msg.setMsg('getReportes');
     return new Promise((resolve, reject) => {
       this.client.obtenerReportes(msg, (err, listaReportes: ListaReportes) => {
         if (listaReportes != null) {
           resolve(listaReportes);
+          this.here.getAddressFromLatLng(position).then(result => {
+            locations = result as Array<any>;
+            console.log(locations);
+        }, error => {
+            console.error(error);
+        });
         } else {
           reject(err);
         }
