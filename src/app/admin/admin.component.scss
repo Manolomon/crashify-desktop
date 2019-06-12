@@ -1,0 +1,58 @@
+// The margin between two sections
+$margin-promotion-sections: 60px;
+$margin-promotion-sections-small: 15px;
+
+.docs-header-background {
+  overflow: hidden;
+  background: url("https://images.unsplash.com/photo-1534158975540-36cc301767ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1491&q=80");
+}
+
+.docs-header-section {
+  text-align: center;
+  padding-top: $margin-promotion-sections;
+}
+
+.docs-header-headline {
+  h1 {
+    font-size: 56px;
+    font-weight: 300;
+    line-height: 56px;
+    margin: 15px 5px;
+    color: white
+  }
+
+  h2 {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 28px;
+    margin: 15px 0 25px 0;
+    color: white;
+  }
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align {
+    padding-top: 13px;
+    flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+    flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.p-title-limit {
+  width: 270px;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.example-icon {
+  padding: 0 14px;
+}

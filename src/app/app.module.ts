@@ -18,6 +18,7 @@ import { LoginService } from './services/login.service';
 import { Usuario, Sesion } from './lib/crashify_pb';
 import { ReporteComponent } from './reportes/reporte/reporte.component';
 import { AdminComponent } from './admin/admin.component';
+import { UsuarioComponent } from './admin/usuario/usuario.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AdminComponent } from './admin/admin.component';
     MenuComponent,
     ReportesComponent,
     ReporteComponent,
-    AdminComponent
+    AdminComponent,
+    UsuarioComponent
   ],
   imports: [
     BrowserModule,

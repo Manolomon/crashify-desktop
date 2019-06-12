@@ -1,5 +1,56 @@
 <app-menu></app-menu>
 
-<p>
-  admin works!
-</p>
+<header class="docs-header-background">
+  <div class="docs-header-section">
+    <div class="docs-header-headline">
+      <h1 class="mat-h1">Administrador</h1>
+      <h2> Vista de gestión de usuarios </h2>
+    </div>
+  </div>
+</header>
+
+<div layout="row" style="padding-bottom: 25px;">
+  <div fxLayout="column" fxFlex="10"></div>
+  <div fxLayout="column" fxFlex="70">
+    <p class="additional_info">Vista de la producción colaborativa del miembro</p>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <button type="button" mat-raised-button color="primary">
+      <mat-icon>create_new_folder</mat-icon>
+      Agregar Usuario
+    </button>
+  </div>
+  <mat-divider class="br_div"></mat-divider>
+</div>
+<div fxFlexAlign="center" fxLayoutAlign="center center">
+  <!-- TODO -->
+</div>
+<div fxFlexAlign="center" fxLayoutAlign="center center">
+  <mat-accordion style="width: 80%" class="example-headers-align" flex>
+    <mat-expansion-panel class="hideOption">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <p class="p-title-limit">Nombre</p>
+        </mat-panel-title>
+        <mat-panel-description>
+          <mat-chip-list>
+            <mat-chip color="primary" selected>
+              Rol
+            </mat-chip>
+          </mat-chip-list>
+          <!-- TODO -->
+          <div class="example-icon">
+            <button mat-icon-button
+              matTooltip="Editar" matTooltipPosition="above">
+              <mat-icon aria-label="Edit Button">edit</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above">
+              <mat-icon aria-label="Delete Button">delete</mat-icon>
+            </button>
+          </div>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-usuario></app-usuario>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
