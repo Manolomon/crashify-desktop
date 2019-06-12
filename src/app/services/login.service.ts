@@ -10,7 +10,7 @@ import { reject } from 'q';
 export class LoginService {
 
   private client: TransitoClient;
-  private user: Usuario = null;
+  private usuario: Usuario = new Usuario();
   constructor() {
     this.client = new TransitoClient('http://localhost:8080', null);
   }
@@ -36,8 +36,15 @@ export class LoginService {
   }
 
   getCurrentUser() {
-    let user: Usuario = JSON.parse(sessionStorage.getItem("usuario"));
-    return user;
+    let usuarioObjeto = JSON.parse(sessionStorage.getItem("usuario"));
+    console.log(usuarioObjeto);
+    this.usuario.setIdsuperior(usuarioObjeto.idsuperior);
+    this.usuario.setIdusuario(usuarioObjeto.idusuario);
+    this.usuario.setNombre(usuarioObjeto.nombre);
+    this.usuario.setPassword(usuarioObjeto.password);
+    this.usuario.setRol(usuarioObjeto.rol);
+    this.usuario.setUsuario(usuarioObjeto.usuario);
+    return this.usuario;
   }
 
   isLogged() {

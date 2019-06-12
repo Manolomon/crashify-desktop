@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Usuario, Sesion, ListaUsuarios, ID, Respuesta, Mensaje, ListaReportes, Dictamen, DictamenUnificado } from '../lib/crashify_pb';
-import { TransitoClient } from '../lib/crashify_pb_service';
+import { Usuario, Sesion, ListaUsuarios, ID, Respuesta, Mensaje, ListaReportes, Dictamen, DictamenUnificado, Reporte, ListaID } from '../lib/crashify_pb';
+import { TransitoClient, ServiceError } from '../lib/crashify_pb_service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,35 @@ export class ReporteService {
       this.client.obtenerReportes(msg, (err, listaReportes: ListaReportes) => {
         if (listaReportes != null) {
           resolve(listaReportes);
+        } else {
+          reject(err);
+        }
+      });
+    });
+  }
+
+  unificarReportes(idReporte1: number, idReporte2: number) {
+    let listaId: ListaID = new ListaID();
+    listaId.addListaid(idReporte1);
+    listaId.addListaid(idReporte2);
+    return new Promise((resolve, reject) => {
+      this.client.unificarReportes(listaId, (err: ServiceError, respuesta: Respuesta) => {
+        if (respuesta != null) {
+          resolve(respuesta);
+        } else {
+          reject(err);
+        }
+      });
+    });
+  }
+
+  getDetallesReporte(idReporte: number) {
+    let id: ID = new ID();
+    id.setIdentifier(idReporte);
+    return new Promise((resolve, reject) => {
+      this.client.obtenerDetalleReporte(id, (err, reporte: Reporte) => {
+        if (reporte != null) {
+          resolve(reporte);
         } else {
           reject(err);
         }
@@ -47,7 +76,7 @@ export class ReporteService {
           reject(err);
         }
       });
-    })
+    });
   }
 
 }
