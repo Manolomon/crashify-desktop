@@ -44,6 +44,11 @@ export class LoginComponent implements OnInit {
             console.log(res.toObject());
             sessionStorage.setItem('usuario', JSON.stringify(res.toObject()));
             this.toastr.success('Conexion exitosa', 'success');
+            if(res.getRol() === 1) {
+              this.router.navigate(['reportes']);
+            } else if (res.getRol() === 2) {
+              this.router.navigate(['admin']);
+            }
           }
         })
         .catch((err: ServiceError) => {
@@ -53,7 +58,7 @@ export class LoginComponent implements OnInit {
             this.toastr.error('Error de conexión', 'error');
           }
         });
-      this.router.navigate(['menu']);
+      
     } else {
       this.toastr.warning('Campos incompletos', 'warning');
     }

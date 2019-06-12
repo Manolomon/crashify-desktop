@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { MenuComponent } from './menu/menu.component';
 import { AuthGuardService as AuthGuard } from '../app/services/auth-guard.service';
+import { ReportesComponent } from './reportes/reportes.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   {
@@ -10,8 +11,13 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'menu',
-    component: MenuComponent,
+    path: 'reportes',
+    component: ReportesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
     canActivate: [AuthGuard],
   },
 
