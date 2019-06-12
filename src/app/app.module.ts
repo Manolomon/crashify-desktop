@@ -16,13 +16,17 @@ import { MenuComponent } from './menu/menu.component';
 import { ReportesComponent } from './reportes/reportes.component';
 import { LoginService } from './services/login.service';
 import { Usuario, Sesion } from './lib/crashify_pb';
+import { ReporteComponent } from './reportes/reporte/reporte.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MenuComponent,
-    ReportesComponent
+    ReportesComponent,
+    ReporteComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

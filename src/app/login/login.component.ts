@@ -53,10 +53,10 @@ export class LoginComponent implements OnInit {
             this.toastr.error('Error de conexión', 'error');
           }
         });
+      this.router.navigate(['menu']);
     } else {
       this.toastr.warning('Campos incompletos', 'warning');
     }
-    this.router.navigate(['menu']);
   }
 
   public cerrarSesion(): void {

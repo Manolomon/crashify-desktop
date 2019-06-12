@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import {SelectionModel} from '@angular/cdk/collections';
-import { Usuario } from '../lib/crashify_pb';
+import { SelectionModel } from '@angular/cdk/collections';
+import { ListaReportes, ReporteResumido } from '../lib/crashify_pb';
 import { MatSort, MatTableDataSource } from '@angular/material';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { ReporteService } from '../services/reporte.service';
+import { ServiceError } from '../lib/crashify_pb_service';
 
 export interface Reporte {
   hora: string;
@@ -26,6 +26,7 @@ const DUMMY: Reporte[] = [
   {id: 3, hora: '13:00', autor: 'Sheldon J. Plankton', ciudad: 'Bikini Button', estatus: 'Pendiente'},
 ];
 
+
 @Component({
   selector: 'app-reportes',
   templateUrl: './reportes.component.html',
@@ -33,26 +34,44 @@ const DUMMY: Reporte[] = [
 })
 export class ReportesComponent implements OnInit {
 
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  isLinear = false;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+  private reportes: Array<ReporteResumido> = [];
 
   displayedColumns: string[] = ['select', 'autor', 'hora', 'ciudad', 'estatus', 'id'];
   dataSource = new MatTableDataSource<Reporte>(DUMMY);
   selection = new SelectionModel<Reporte>(true, []);
 
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(
+    private reporteService: ReporteService
+  ) { }
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
-    this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
+    this.obtenerReportes();
+  }
+
+  async obtenerReportes() {
+    console.log('Haciendo cosas');
+    await this.reporteService.obtenerReportes()
+      .then((res: ListaReportes) => {
+        if (res.getReportesList() != null) {
+          console.log(res.toObject().reportesList);
+          res.getReportesList().forEach(element => {
+            this.reportes.push(element);
+          });
+          console.log(this.reportes[1].getEstado());
+          //sessionStorage.setItem('reporte', JSON.stringify(res.toObject()));
+          //this.toastr.success('Conexion exitosa', 'success');
+        }
+      })
+      .catch((err: ServiceError) => {
+        if (err.code === 2) { // Si regresó null la consulta
+          //this.toastr.warning('Datos incorrectos', 'Warning');
+        } else if (err.code === 14) { // Si no hay conexión con el servidor
+          //this.toastr.error('Error de conexión', 'error');
+        }
+      });
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -65,8 +84,8 @@ export class ReportesComponent implements OnInit {
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
+      this.selection.clear() :
+      this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
   /** The label for the checkbox on the passed row */
@@ -78,6 +97,6 @@ export class ReportesComponent implements OnInit {
   }
 
   selectRow(row) {
-   alert(row.autor);
- }
+    alert(row.autor);
+  }
 }
