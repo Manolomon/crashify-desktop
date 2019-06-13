@@ -47,7 +47,7 @@
 
   <!-- Weight Column -->
   <ng-container matColumnDef="conductor">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Autor </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Conductor </th>
     <td mat-cell *matCellDef="let element"> {{element.conductor}} </td>
   </ng-container>
 
@@ -67,12 +67,18 @@
   <ng-container matColumnDef="estado">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
     <td mat-cell *matCellDef="let element">
-      <p *ngIf="element.estado === 0">Pendiente</p>
-      <p *ngIf="element.estado === 1">Dictaminado</p>
+        <mat-chip-list>
+            <mat-chip color="primary" selected *ngIf="element.estado === 1">
+              Dictaminado
+            </mat-chip>
+            <mat-chip color="accent" selected *ngIf="element.estado === 0">
+              Pendiente
+            </mat-chip>
+          </mat-chip-list>
     </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectRow(row)"></tr>
+  <tr mat-row class="example-element-row" *matRowDef="let row; columns: displayedColumns;" (click)="selectRow(row)"></tr>
   <!-- selection.toggle(row);  -->
 </table>

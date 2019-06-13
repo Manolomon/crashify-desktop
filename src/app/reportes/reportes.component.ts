@@ -36,6 +36,7 @@ export class ReportesComponent implements OnInit {
     this.reportes = [];
     await this.obtenerReportes();
     this.dataSource = new MatTableDataSource(this.reportes);
+    this.selection = new SelectionModel<ReporteData>(true, []);
     this.dataSource.sort = this.sort;
     //this.unificarReportes();
     //this.dictaminarReporteUnificado();

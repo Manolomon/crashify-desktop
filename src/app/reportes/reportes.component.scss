@@ -39,3 +39,11 @@ table {
 th.mat-sort-header-sorted {
   color: black;
 }
+
+tr.example-element-row:hover {
+  background: #E5E5E5;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
