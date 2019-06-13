@@ -30,10 +30,11 @@ export class ReporteService {
     });
   }
 
-  unificarReportes(idReporte1: number, idReporte2: number) {
+  unificarReportes(idReportesList: number[]) {
     let listaId: ListaID = new ListaID();
-    listaId.addListaid(idReporte1);
-    listaId.addListaid(idReporte2);
+    idReportesList.forEach(element => {
+      listaId.addListaid(element);
+    });
     return new Promise((resolve, reject) => {
       this.client.unificarReportes(listaId, (err: ServiceError, respuesta: Respuesta) => {
         if (respuesta != null) {

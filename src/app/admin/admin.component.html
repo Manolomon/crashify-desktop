@@ -12,9 +12,9 @@
 <div layout="row" style="padding-bottom: 25px;">
   <div fxLayout="column" fxFlex="10"></div>
   <div fxLayout="column" fxFlex="70">
-    <p class="additional_info">Vista de la producción colaborativa del miembro</p>
+    <p class="additional_info">Seleccione cualquier usuario para ver sus datos</p>
   </div>
-  <div fxLayout="row" fxLayo  utAlign="end center">
+  <div fxLayout="row" fxLayoutAlign="end center">
     <button type="button" mat-raised-button color="primary" (click)="agregarUsuario()">
       <mat-icon>person_add</mat-icon>
       &nbsp;&nbsp;Agregar Usuario
@@ -63,8 +63,8 @@
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <app-usuario (recargarUsuarios)="recargarUsuarios($event)" (edicionCancelada)="edicionCancelada($event)" [usuarioObjeto]="user" [habilitaCampos]="camposHabilitados"
-      [eliminarProducto]="eliminaProducto"></app-usuario>
+      <app-usuario (recargarUsuarios)="recargarUsuarios($event)" (edicionCancelada)="edicionCancelada($event)"
+        [usuarioObjeto]="user" [habilitaCampos]="camposHabilitados" [eliminarProducto]="eliminaProducto"></app-usuario>
     </mat-expansion-panel>
   </mat-accordion>
 </div>

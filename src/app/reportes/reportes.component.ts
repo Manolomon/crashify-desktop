@@ -19,13 +19,10 @@ export class ReportesComponent implements OnInit {
 
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  private reportes: ReporteData[] = [
-    { ciudad: 'Xalapa', conductor: 'Juan Carlos Somohano', estado: 0, hora: '2019-06-08 16:22:01 -0500', idReporte: 1, idSiniestro: 8 },
-    { ciudad: 'Xalapa', conductor: 'Juan Carlos Somohano', estado: 0, hora: '2019-06-08 16:22:01 -0500', idReporte: 4, idSiniestro: 8 }
-  ];
+  private reportes: ReporteData[] = [];
 
   displayedColumns: string[] = ['select', 'conductor', 'hora', 'ciudad', 'estado', 'idSiniestro'];
-  dataSource = new MatTableDataSource(this.reportes);
+  dataSource: MatTableDataSource<ReporteData>;
   selection = new SelectionModel<ReporteData>(true, []);
 
   constructor(
@@ -37,8 +34,9 @@ export class ReportesComponent implements OnInit {
 
   async ngOnInit() {
     this.reportes = [];
-    this.dataSource.sort = this.sort;
     await this.obtenerReportes();
+    this.dataSource = new MatTableDataSource(this.reportes);
+    this.dataSource.sort = this.sort;
     //this.unificarReportes();
     //this.dictaminarReporteUnificado();
     //this.dictaminarReporte();
@@ -56,10 +54,21 @@ export class ReportesComponent implements OnInit {
               idSiniestro: element.getIdsiniestro(),
               conductor: element.getNombreconductor(),
               hora: element.getHora(),
-              ciudad: 'Xalapa',
+              ciudad: 'Not found',
               estado: element.getEstado(),
             };
             docRefs.push(dummy);
+            const position = element.getLatitud() + ',' + element.getLongitud();
+            let locations: Array<any>;
+            this.here.getAddressFromLatLng(position)
+              .then((result) =>  {
+                locations = result as Array<any>;
+                console.log(locations);
+                dummy.ciudad = locations[0].Location.Address.City;
+              })
+              .catch((err) => {
+                console.log('Error de getCity: ', err);
+              });
           });
         }
       })
@@ -126,25 +135,6 @@ export class ReportesComponent implements OnInit {
       });
   }
 
-  async unificarReportes() {
-    let idReporte1: number = this.reportes[0].idReporte;
-    let idReporte2: number = this.reportes[1].idReporte;
-    await this.reporteService.unificarReportes(idReporte1, idReporte2)
-      .then((res: Respuesta) => {
-        if (res.getCode() == 1) {
-          this.toastr.success(res.getMensaje(), "success");
-        } else if (res.getCode() != 99) {
-          this.toastr.error(res.getMensaje(), "error");
-        } else {
-          this.toastr.error("Error de conexixón", "error");
-        }
-      })
-      .catch((err: ServiceError) => {
-        this.toastr.error(err.message.toString(), "error");
-      });
-
-  }
-
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -189,7 +179,7 @@ export class ReportesComponent implements OnInit {
         ciudad = locations[0].Location.Address.City;
       })
       .catch((err) => {
-        console.log("Error de getCity: ", err);
+        console.log('Error de getCity: ', err);
         return response;
       });
     return ciudad;
@@ -198,5 +188,42 @@ export class ReportesComponent implements OnInit {
   public round(value, precision) {
     var multiplier = Math.pow(10, precision || 0);
     return Math.round(value * multiplier) / multiplier;
+  }
+
+  async unificar() {
+    console.log('Unificando...');
+    console.log(this.selection.selected);
+    const id = this.selection.selected[0].idSiniestro;
+    let diferentes = false;
+    this.selection.selected.forEach(element => {
+      if (element.idSiniestro !== id) {
+        console.log('Hey');
+        diferentes = true;
+        return;
+      }
+    });
+    if (diferentes) {
+      this.toastr.warning('Los reportes seleccionados son de diferentes eventos', 'Warning');
+      return;
+    } else {
+      let listsIdReportes: number[] = [];
+      this.selection.selected.forEach(element => {
+        listsIdReportes.push(element.idReporte);
+      });
+      await this.reporteService.unificarReportes(listsIdReportes)
+        .then((res: Respuesta) => {
+          if (res.getCode() === 1) {
+            this.toastr.success(res.getMensaje(), 'success');
+          } else if (res.getCode() != 99) {
+            this.toastr.error(res.getMensaje(), 'error');
+          } else {
+            this.toastr.error('Error de conexixón', 'error');
+          }
+        })
+        .catch((err: ServiceError) => {
+          this.toastr.error(err.message.toString(), 'error');
+        });
+      this.ngOnInit();
+    }
   }
 }

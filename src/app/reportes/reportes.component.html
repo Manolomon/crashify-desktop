@@ -9,7 +9,21 @@
   </div>
 </header>
 
-<table mat-table [dataSource]="reportes" matSort class="mat-elevation-z8">
+<div layout="row" style="padding-bottom: 25px;">
+  <div fxLayout="column" fxFlex="10"></div>
+  <div fxLayout="column" fxFlex="70">
+    <p class="additional_info">Seleccione los reportes para unificar, o click en alguno para ver detalle</p>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <button *ngIf="selection.selected.length > 1" type="button" mat-raised-button color="primary" (click)="unificar()">
+      <mat-icon>assignment_late</mat-icon>
+      &nbsp;&nbsp;Unificar Reportes
+    </button>
+  </div>
+  <mat-divider class="br_div"></mat-divider>
+</div>
+
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
   <!-- Checkbox Column -->
   <ng-container matColumnDef="select">
@@ -52,7 +66,10 @@
   <!-- Symbol Column -->
   <ng-container matColumnDef="estado">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
-    <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
+    <td mat-cell *matCellDef="let element">
+      <p *ngIf="element.estado === 0">Pendiente</p>
+      <p *ngIf="element.estado === 1">Dictaminado</p>
+    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
