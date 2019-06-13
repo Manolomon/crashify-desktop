@@ -21,7 +21,7 @@ export class ReportesComponent implements OnInit {
 
   private reportes: ReporteData[] = [
     { ciudad: 'Xalapa', conductor: 'Juan Carlos Somohano', estado: 0, hora: '2019-06-08 16:22:01 -0500', idReporte: 1, idSiniestro: 8 },
-    {ciudad: 'Xalapa', conductor: 'Juan Carlos Somohano', estado: 0, hora: '2019-06-08 16:22:01 -0500', idReporte: 4, idSiniestro: 8}
+    { ciudad: 'Xalapa', conductor: 'Juan Carlos Somohano', estado: 0, hora: '2019-06-08 16:22:01 -0500', idReporte: 4, idSiniestro: 8 }
   ];
 
   displayedColumns: string[] = ['select', 'conductor', 'hora', 'ciudad', 'estado', 'idSiniestro'];
@@ -38,7 +38,7 @@ export class ReportesComponent implements OnInit {
   async ngOnInit() {
     this.reportes = [];
     this.dataSource.sort = this.sort;
-    this.obtenerReportes();
+    await this.obtenerReportes();
     //this.unificarReportes();
     //this.dictaminarReporteUnificado();
     //this.dictaminarReporte();
@@ -67,6 +67,7 @@ export class ReportesComponent implements OnInit {
         if (err.code === 2) { // Si regresó null la consulta
           this.toastr.warning('No se encontraron reportes', 'Warning');
         } else if (err.code === 14) { // Si no hay conexión con el servidor
+          console.log(err);
           this.toastr.error('Error de conexión', 'error');
         }
       });
@@ -170,22 +171,28 @@ export class ReportesComponent implements OnInit {
         if (err.code === 2) { // Si regresó null la consulta
           this.toastr.warning('Error al cargar datos', 'Warning');
         } else if (err.code === 14) { // Si no hay conexión con el servidor
+          console.log(err);
           this.toastr.error('Error de conexión', 'error');
         }
       });
   }
 
-  public getCityFromCoordinates(lat: number, lon: number) {
+  async getCityFromCoordinates(lat: number, lon: number) {
     const position = lat + ',' + lon;
     let locations: Array<any>;
     let response = 'Not found';
-    return this.here.getAddressFromLatLng(position).then(result => {
-      locations = result as Array<any>;
-      console.log(locations);
-      return locations[0].Location.Address.City;
-    }, error => {
-      return response;
-    });
+    let ciudad = null;
+    await this.here.getAddressFromLatLng(position)
+      .then((result) => {
+        locations = result as Array<any>;
+        console.log(locations);
+        ciudad = locations[0].Location.Address.City;
+      })
+      .catch((err) => {
+        console.log("Error de getCity: ", err);
+        return response;
+      });
+    return ciudad;
   }
 
   public round(value, precision) {

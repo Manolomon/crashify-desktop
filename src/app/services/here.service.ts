@@ -55,17 +55,21 @@ export class HereService {
     });
   }
 
-  public getCityFromCoordinates(lat: number, lon: number): string {
+  public getCityFromCoordinates(lat: number, lon: number) {
     const position = lat + ',' + lon;
     let locations: Array<any>;
     let response = 'Not found';
-    this.getAddressFromLatLng(position).then(result => {
-      locations = result as Array<any>;
-      response = locations[0].Location.Address.City;
-    }, error => {
-      console.log(error);
+    return new Promise((resolve, reject) => {
+      this.getAddressFromLatLng(position)
+        .then(result => {
+          locations = result as Array<any>;
+          response = locations[0].Location.Address.City;
+          resolve(response);
+        }, error => {
+          console.log(error);
+          reject(error);
+        });
     });
-    return response;
   }
 
 }
