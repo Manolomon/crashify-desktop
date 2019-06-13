@@ -11,6 +11,7 @@ export class HereService {
   public geocoder: any;
 
   public constructor() {
+    // https://developer.here.com/blog/using-the-here-geocoder-api-for-javascript-in-an-angular-application
     this.platform = new H.service.Platform({
       app_id: 'zYnGMCBW5uCrUsBWPrdX',
       app_code: 'o67LvF8wyN3mt6PvYzw1wg'
@@ -52,6 +53,19 @@ export class HereService {
         reject(error);
       });
     });
+  }
+
+  public getCityFromCoordinates(lat: number, lon: number): string {
+    const position = lat + ',' + lon;
+    let locations: Array<any>;
+    let response = 'Not found';
+    this.getAddressFromLatLng(position).then(result => {
+      locations = result as Array<any>;
+      response = locations[0].Location.Address.City;
+    }, error => {
+      console.log(error);
+    });
+    return response;
   }
 
 }

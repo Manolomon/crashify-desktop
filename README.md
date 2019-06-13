@@ -10,7 +10,7 @@ Aplicación de escritorio para la recepción de reportes de accidentes de tráns
 Uso de imagen para la generación del proxy de envoy, que es requisito para la ejecución de gRPC en tecnología web.
 
 Más información:
-- [gRPC for Web Clients Repository](https://github.com/grpc/grpc-web#2-run-the-server-and-proxy)
+- [gRPC for Web Clients Repository](https://github.com/grpc/grpc-web#2-run-the-server-and-proxy),
 - [How to use gRPC-web with React](https://medium.com/free-code-camp/how-to-use-grpc-web-with-react-1c93feb691b5)
 - [A TODO app using grpc-web and Vue.js](https://medium.com/@aravindhanjay/a-todo-app-using-grpc-web-and-vue-js-4e0c18461a3e)
 

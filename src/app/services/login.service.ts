@@ -27,7 +27,7 @@ export class LoginService {
     return new Promise((resolve, reject) => {
       this.client.iniciarSesion(sesion, (err, usuario: Usuario) => {
         if (usuario != null) {
-          console.log(usuario)
+          console.log(usuario);
           resolve(usuario);
         } else {
           reject(err);
