@@ -8,7 +8,7 @@
     </mat-form-field>
     <mat-form-field fxFlex appearance="outline">
       <mat-label>Cargo</mat-label>
-      <mat-select formControlName="cargoControl" [(ngModel)]="usuarioTemp.rol" name="cargo" required>
+      <mat-select formControlName="cargoControl" [(ngModel)]="usuarioTemp.cargo" name="cargo" required>
         <mat-option value="1">Perito</mat-option>
         <mat-option value="2">Administrativo</mat-option>
         <mat-option value="3">Soporte</mat-option>
@@ -21,9 +21,9 @@
       <mat-label>Usuario</mat-label>
       <input formControlName="usernameControl" [(ngModel)]="usuarioTemp.username" name="username" matInput required />
     </mat-form-field>
-    <mat-form-field fxFlex appearance="outline">
+    <mat-form-field *ngIf="nuevoUsuario" fxFlex appearance="outline">
       <mat-label>Contraseña</mat-label>
-      <input formControlName="passwordControl" name="password" matInput placeholder="Dejar vacío para conservar contraseña actual" [type]="hide ? 'password' : 'text'">
+      <input formControlName="passwordControl" required [(ngModel)]="passwordTemp" name="password" matInput [type]="hide ? 'password' : 'text'">
       <mat-icon matSuffix class="icon-color" (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
       </mat-icon>
     </mat-form-field>

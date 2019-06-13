@@ -19,10 +19,13 @@ export class ReportesComponent implements OnInit {
 
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  private reportes: Array<ReporteData>;
+  private reportes: ReporteData[] = [
+    { ciudad: 'Xalapa', conductor: 'Juan Carlos Somohano', estado: 0, hora: '2019-06-08 16:22:01 -0500', idReporte: 1, idSiniestro: 8 },
+    {ciudad: 'Xalapa', conductor: 'Juan Carlos Somohano', estado: 0, hora: '2019-06-08 16:22:01 -0500', idReporte: 4, idSiniestro: 8}
+  ];
 
   displayedColumns: string[] = ['select', 'conductor', 'hora', 'ciudad', 'estado', 'idSiniestro'];
-  dataSource: MatTableDataSource<ReporteData>;
+  dataSource = new MatTableDataSource(this.reportes);
   selection = new SelectionModel<ReporteData>(true, []);
 
   constructor(
@@ -33,9 +36,9 @@ export class ReportesComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.obtenerReportes();
-    this.dataSource = new MatTableDataSource(this.reportes);
+    this.reportes = [];
     this.dataSource.sort = this.sort;
+    this.obtenerReportes();
     //this.unificarReportes();
     //this.dictaminarReporteUnificado();
     //this.dictaminarReporte();
@@ -51,7 +54,7 @@ export class ReportesComponent implements OnInit {
             const dummy: ReporteData = {
               idReporte: element.getIdreporte(),
               idSiniestro: element.getIdsiniestro(),
-              conductor: 'Santa Claus',
+              conductor: element.getNombreconductor(),
               hora: element.getHora(),
               ciudad: 'Xalapa',
               estado: element.getEstado(),
@@ -69,9 +72,6 @@ export class ReportesComponent implements OnInit {
       });
     this.reportes = docRefs;
     console.log(this.reportes);
-    this.reportes.push(
-      { idReporte: 1, idSiniestro: 2, conductor: 'No c', ciudad: 'Coateyork', hora: '23:45', estado: 0 }
-    );
   }
 
   //async dictaminarReporte() {
@@ -158,8 +158,21 @@ export class ReportesComponent implements OnInit {
       this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
-  selectRow(row) {
-    alert(row.autor);
+  async selectRow(row) {
+    console.log(row.idReporte);
+    await this.reporteService.getDetallesReporte(row.idReporte)
+      .then((res: Reporte) => {
+        if (res.getIdreporte() != null) {
+          console.log(res);
+        }
+      })
+      .catch((err: ServiceError) => {
+        if (err.code === 2) { // Si regresó null la consulta
+          this.toastr.warning('Error al cargar datos', 'Warning');
+        } else if (err.code === 14) { // Si no hay conexión con el servidor
+          this.toastr.error('Error de conexión', 'error');
+        }
+      });
   }
 
   public getCityFromCoordinates(lat: number, lon: number) {

@@ -14,8 +14,8 @@
   <div fxLayout="column" fxFlex="70">
     <p class="additional_info">Vista de la producción colaborativa del miembro</p>
   </div>
-  <div fxLayout="row" fxLayoutAlign="end center">
-    <button type="button" mat-raised-button color="primary">
+  <div fxLayout="row" fxLayo  utAlign="end center">
+    <button type="button" mat-raised-button color="primary" (click)="agregarUsuario()">
       <mat-icon>person_add</mat-icon>
       &nbsp;&nbsp;Agregar Usuario
     </button>
@@ -23,7 +23,9 @@
   <mat-divider class="br_div"></mat-divider>
 </div>
 <div fxFlexAlign="center" fxLayoutAlign="center center">
-  <!-- TODO -->
+  <app-usuario [habilitaCampos]="true" (creacionCancelada)="creacionCancelada($event)" [nuevoUsuario]="true"
+    *ngIf="agregaUsuario">
+  </app-usuario>
 </div>
 <div fxFlexAlign="center" fxLayoutAlign="center center">
   <mat-accordion style="width: 80%" class="example-headers-align" flex>

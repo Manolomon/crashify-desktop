@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Usuario, ListaUsuarios, ID, Respuesta } from '../lib/crashify_pb';
 import { TransitoClient } from '../lib/crashify_pb_service';
-
+import * as sha256 from 'js-sha256';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +29,7 @@ export class UsuarioService {
   }
 
   registrarUsuario(usuario: Usuario) {
+    usuario.setPassword(sha256.sha256(usuario.getPassword()));
     return new Promise((resolve, reject) => {
       this.client.registrarUsuario(usuario, (err, respuesta: Respuesta) => {
         if (respuesta != null) {

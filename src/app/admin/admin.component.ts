@@ -105,4 +105,21 @@ export class AdminComponent implements OnInit {
   togglePanels(index: number) {
     this.indexExpanded = index === this.indexExpanded ? -1 : index;
   }
+
+  public agregarUsuario() {
+    this.agregaUsuario = true;
+  }
+
+  public creacionCancelada(cancelado: boolean) {
+    this.agregaUsuario = !this.agregaUsuario;
+    this.ngOnInit();
+  }
+
+  public cargarProductos(cargar: boolean) {
+    this.ngOnInit();
+  }
+
+  public edicionCancelada(editar: boolean) {
+    this.camposHabilitados = false;
+  }
 }
