@@ -53,7 +53,8 @@ import { DialogoComponent } from './dialogo/dialogo.component';
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [
-    DialogoComponent
+    DialogoComponent,
+    ReporteComponent
   ]
 })
 export class AppModule { }

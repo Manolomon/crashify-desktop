@@ -5,9 +5,11 @@ import { MatSort, MatTableDataSource } from '@angular/material';
 import { ReporteService } from '../services/reporte.service';
 import { ServiceError } from '../lib/crashify_pb_service';
 import { LoginService } from '../services/login.service';
+import { MatDialog } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { ReporteData } from '../models/ReporteData.model';
 import { HereService } from '../services/here.service';
+import { ReporteComponent } from './reporte/reporte.component';
 
 
 @Component({
@@ -21,13 +23,14 @@ export class ReportesComponent implements OnInit {
 
   private reportes: ReporteData[] = [];
 
-  displayedColumns: string[] = ['select', 'conductor', 'hora', 'ciudad', 'estado', 'idSiniestro'];
+  displayedColumns: string[] = ['select', 'conductor', 'hora', 'ciudad', 'estado', 'idSiniestro', 'idSiniestroFinal'];
   dataSource: MatTableDataSource<ReporteData>;
   selection = new SelectionModel<ReporteData>(true, []);
 
   constructor(
     private reporteService: ReporteService,
     private loginService: LoginService,
+    public dialog: MatDialog,
     private toastr: ToastrService,
     private here: HereService,
   ) { }
@@ -53,9 +56,11 @@ export class ReportesComponent implements OnInit {
             const dummy: ReporteData = {
               idReporte: element.getIdreporte(),
               idSiniestro: element.getIdsiniestro(),
+              idSiniestroFinal: element.getIdsiniestrounificado(),
               conductor: element.getNombreconductor(),
               hora: element.getHora(),
               ciudad: 'Not found',
+              direccion: 'Not found',
               estado: element.getEstado(),
             };
             docRefs.push(dummy);
@@ -66,6 +71,7 @@ export class ReportesComponent implements OnInit {
                 locations = result as Array<any>;
                 console.log(locations);
                 dummy.ciudad = locations[0].Location.Address.City;
+                dummy.direccion = locations[0].Location.Address.Label;
               })
               .catch((err) => {
                 console.log('Error de getCity: ', err);
@@ -150,12 +156,22 @@ export class ReportesComponent implements OnInit {
       this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
-  async selectRow(row) {
+  async detalleReporte(row) {
     console.log(row.idReporte);
     await this.reporteService.getDetallesReporte(row.idReporte)
       .then((res: Reporte) => {
         if (res.getIdreporte() != null) {
           console.log(res);
+          var resultado: boolean;
+          const dialogRef = this.dialog.open(ReporteComponent, {
+            width: '40%',
+          });
+          dialogRef.afterClosed().subscribe(result => {
+            resultado = result;
+            if (result) {
+              console.log('Creo que lo cerró');
+            }
+          });
         }
       })
       .catch((err: ServiceError) => {
@@ -215,7 +231,7 @@ export class ReportesComponent implements OnInit {
         .then((res: Respuesta) => {
           if (res.getCode() === 1) {
             this.toastr.success(res.getMensaje(), 'success');
-          } else if (res.getCode() != 99) {
+          } else if (res.getCode() !== 99) {
             this.toastr.error(res.getMensaje(), 'error');
           } else {
             this.toastr.error('Error de conexixón', 'error');

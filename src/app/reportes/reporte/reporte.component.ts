@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-reporte',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReporteComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public dialogRef: MatDialogRef<ReporteComponent>,
+  ) { }
 
   ngOnInit() {
   }
 
+  onNoClick(): void {
+    this.dialogRef.close(false);
+  }
 }
