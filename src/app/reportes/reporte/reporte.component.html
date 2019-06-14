@@ -1,6 +1,6 @@
 <div fxLayout="row">
   <h1 mat-dialog-title>Detalle de Reporte<br>
-    <small class="utility-icon"><b>Conductor: </b>{{ data.firstData.conductor }}</small>
+    <small class="utility-icon">{{ data.firstData.hora }}</small>
   </h1>
   <span class="example-spacer"></span>
   <button class="example-icon" mat-icon-button (click)="onNoClick()">
@@ -10,7 +10,7 @@
 <mat-divider></mat-divider>
 <div mat-dialog-content>
   <p>{{ data.firstData.direccion }}<br>
-    <small class="utility-icon">{{ data.firstData.hora }}</small>
+    <small class="utility-icon"><b>Conductor que reportó: </b>{{ data.firstData.conductor }}</small>
   </p>
   <mat-list class="make-scrollable" flex>
     <h2 mat-subheader>Vehículos Involucrados</h2>

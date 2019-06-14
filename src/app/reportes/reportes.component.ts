@@ -23,7 +23,7 @@ export class ReportesComponent implements OnInit {
 
   private reportes: ReporteData[] = [];
 
-  displayedColumns: string[] = ['select', 'conductor', 'hora', 'ciudad', 'estado', 'idSiniestro', 'idSiniestroFinal'];
+  displayedColumns: string[] = ['select', 'conductor', 'fecha' , 'hora', 'ciudad', 'estado', 'idSiniestro', 'idSiniestroFinal'];
   dataSource: MatTableDataSource<ReporteData>;
   selection = new SelectionModel<ReporteData>(true, []);
 
@@ -58,7 +58,7 @@ export class ReportesComponent implements OnInit {
               idSiniestro: element.getIdsiniestro(),
               idSiniestroFinal: element.getIdsiniestrounificado(),
               conductor: element.getNombreconductor(),
-              hora: element.getHora(),
+              hora: new Date(element.getHora()),
               ciudad: 'Not found',
               direccion: 'Not found',
               estado: element.getEstado(),
@@ -164,7 +164,7 @@ export class ReportesComponent implements OnInit {
           console.log(res);
           var resultado: boolean;
           const dialogRef = this.dialog.open(ReporteComponent, {
-            width: '40%',
+            width: '50%',
             data: {
               firstData: row,
               additionalData: res

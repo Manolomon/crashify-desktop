@@ -3,7 +3,7 @@ export interface ReporteData {
     idSiniestro: number;
     idSiniestroFinal: number;
     conductor: string;
-    hora: string;
+    hora: Date;
     ciudad: string;
     direccion: string;
     estado: number;
