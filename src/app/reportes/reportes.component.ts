@@ -165,6 +165,10 @@ export class ReportesComponent implements OnInit {
           var resultado: boolean;
           const dialogRef = this.dialog.open(ReporteComponent, {
             width: '40%',
+            data: {
+              firstData: row,
+              additionalData: res
+            }
           });
           dialogRef.afterClosed().subscribe(result => {
             resultado = result;

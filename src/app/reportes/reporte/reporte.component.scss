@@ -5,3 +5,20 @@
 .utility-icon {
     color: #757575
 }
+
+mat-list.make-scrollable {
+    height: 50%; //Or any other height you wish
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.p-title-limit {
+    width: 70%;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.icon-color {
+    color: #47485D
+}

@@ -6,6 +6,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule, Toast } from 'ngx-toastr';
+import { NgImageSliderModule } from 'ng-image-slider';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -49,6 +50,7 @@ import { DialogoComponent } from './dialogo/dialogo.component';
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
+    NgImageSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,10 +1,25 @@
 <div fxLayout="row">
-  <h1 mat-dialog-title>Detalle de Reporte</h1>
+  <h1 mat-dialog-title>Detalle de Reporte<br>
+    <small class="utility-icon"><b>Conductor: </b>{{ data.firstData.conductor }}</small>
+  </h1>
   <span class="example-spacer"></span>
   <button class="example-icon" mat-icon-button (click)="onNoClick()">
     <mat-icon class="utility-icon" aria-label="Close Button">close</mat-icon>
   </button>
 </div>
+<mat-divider></mat-divider>
 <div mat-dialog-content>
-  <p>Pantalla</p>
+  <p>{{ data.firstData.direccion }}<br>
+    <small class="utility-icon">{{ data.firstData.hora }}</small>
+  </p>
+  <mat-list class="make-scrollable" flex>
+    <h2 mat-subheader>Vehículos Involucrados</h2>
+    <mat-divider></mat-divider>
+    <mat-list-item class="p-title-limit" *ngFor="let vehiculo of data.additionalData.getVehiculosList()">
+      <mat-icon mat-list-icon class="icon-color">time_to_leave</mat-icon>
+      <h4 mat-line>{{vehiculo.getMarca()}}</h4>
+      <p mat-line> {{vehiculo.getColor()}} </p>
+    </mat-list-item>
+  </mat-list>
+  <ng-image-slider [images]="imageObject" #nav></ng-image-slider>
 </div>
