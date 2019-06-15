@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   Usuario, Sesion, ListaUsuarios, ID,
   Respuesta, Mensaje, ListaReportes, Dictamen,
-  DictamenUnificado, Reporte, ListaID
+  DictamenUnificado, Reporte, ListaID, Foto
 } from '../lib/crashify_pb';
 import { TransitoClient, ServiceError } from '../lib/crashify_pb_service';
 
@@ -69,6 +69,25 @@ export class ReporteService {
           reject(err);
         }
       });
+    });
+  }
+
+  async obtenerFotosReporte(idReporte: number) {
+    let id: ID = new ID();
+    id.setIdentifier(idReporte);
+    let fotos: Array<Foto> = [];
+    return new Promise((resolve, reject) => {
+      this.client.obtenerFotosReporte(id)
+        .on('data', (foto) => {
+          fotos.push(foto);
+        })
+        .on('end', () => {
+          if (fotos.length != 0) {
+            resolve(fotos)
+          } else {
+            reject(new Error("error"));
+          }
+        });
     });
   }
 
