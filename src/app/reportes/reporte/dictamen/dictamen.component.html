@@ -1,0 +1,8 @@
+<form novalidate [formGroup]="DictamenForm" (ngSubmit)="onGuardarDictamen(formNew)" #formNew="ngForm" fxLayout="column">
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <div class="example-button-row">
+      <button type="button" mat-stroked-button color="primary" (click)="cancelarEdicion()">Cancelar</button>
+      <button type="submit" mat-raised-button color="primary" [disabled]="dictamenForm.disabled">Guardar</button>
+    </div>
+  </div>
+</form>

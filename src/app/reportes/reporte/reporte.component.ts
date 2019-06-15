@@ -18,8 +18,6 @@ export interface ReporteDataDetallado {
 })
 export class ReporteComponent implements OnInit {
 
-  private fotos: Array<any> = [];
-
   private imageObject: Array<object> = [
     {
       // tslint:disable-next-line: max-line-length
@@ -32,11 +30,14 @@ export class ReporteComponent implements OnInit {
     public dialogRef: MatDialogRef<ReporteComponent>,
     private reporteService: ReporteService,
     private toastr: ToastrService,
-  ) { }
+  ) { this.loadImages(this.data.additionalData.getIdreporte()); }
 
   async ngOnInit() {
+  }
+
+  async loadImages(idReporte: number) {
     const fotosReporte: Array<object> = [];
-    await this.reporteService.obtenerFotosReporte(1)
+    await this.reporteService.obtenerFotosReporte(idReporte)
       .then((fotos: Array<Foto>) => {
         console.log(fotos);
         fotos.forEach((foto) => {
@@ -47,7 +48,7 @@ export class ReporteComponent implements OnInit {
         });
       })
       .catch((err) => {
-        console.log(err);
+        this.toastr.warning('No se encontraron fotos asociadas al evento', 'Warning');
       });
     this.imageObject = fotosReporte;
   }

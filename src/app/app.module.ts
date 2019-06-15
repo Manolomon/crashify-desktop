@@ -21,6 +21,7 @@ import { ReporteComponent } from './reportes/reporte/reporte.component';
 import { AdminComponent } from './admin/admin.component';
 import { UsuarioComponent } from './admin/usuario/usuario.component';
 import { DialogoComponent } from './dialogo/dialogo.component';
+import { DictamenComponent } from './reportes/reporte/dictamen/dictamen.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { DialogoComponent } from './dialogo/dialogo.component';
     ReporteComponent,
     AdminComponent,
     UsuarioComponent,
-    DialogoComponent
+    DialogoComponent,
+    DictamenComponent
   ],
   imports: [
     BrowserModule,

@@ -41,9 +41,6 @@ export class ReportesComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.reportes);
     this.selection = new SelectionModel<ReporteData>(true, []);
     this.dataSource.sort = this.sort;
-    //this.unificarReportes();
-    //this.dictaminarReporteUnificado();
-    //this.dictaminarReporte();
   }
 
   async obtenerReportes() {
@@ -171,6 +168,7 @@ export class ReportesComponent implements OnInit {
               additionalData: res
             }
           });
+          dialogRef.disableClose = true;
           dialogRef.afterClosed().subscribe(result => {
             resultado = result;
             if (result) {

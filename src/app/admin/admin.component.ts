@@ -115,10 +115,6 @@ export class AdminComponent implements OnInit {
     this.ngOnInit();
   }
 
-  public cargarProductos(cargar: boolean) {
-    this.ngOnInit();
-  }
-
   public edicionCancelada(editar: boolean) {
     this.camposHabilitados = false;
   }

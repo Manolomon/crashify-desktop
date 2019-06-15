@@ -17,7 +17,7 @@ export class ReporteService {
   }
 
   obtenerReportes() {
-    let msg: Mensaje = new Mensaje();
+    const msg: Mensaje = new Mensaje();
     msg.setMsg('getReportes');
     return new Promise((resolve, reject) => {
       this.client.obtenerReportes(msg, (err, listaReportes: ListaReportes) => {
@@ -31,7 +31,7 @@ export class ReporteService {
   }
 
   unificarReportes(idReportesList: number[]) {
-    let listaId: ListaID = new ListaID();
+    const listaId: ListaID = new ListaID();
     idReportesList.forEach(element => {
       listaId.addListaid(element);
     });
@@ -47,7 +47,7 @@ export class ReporteService {
   }
 
   getDetallesReporte(idReporte: number) {
-    let id: ID = new ID();
+    const id: ID = new ID();
     id.setIdentifier(idReporte);
     return new Promise((resolve, reject) => {
       this.client.obtenerDetalleReporte(id, (err, reporte: Reporte) => {
@@ -73,19 +73,19 @@ export class ReporteService {
   }
 
   async obtenerFotosReporte(idReporte: number) {
-    let id: ID = new ID();
+    const id: ID = new ID();
     id.setIdentifier(idReporte);
-    let fotos: Array<Foto> = [];
+    const fotos: Array<Foto> = [];
     return new Promise((resolve, reject) => {
       this.client.obtenerFotosReporte(id)
         .on('data', (foto) => {
           fotos.push(foto);
         })
         .on('end', () => {
-          if (fotos.length != 0) {
-            resolve(fotos)
+          if (fotos.length !== 0) {
+            resolve(fotos);
           } else {
-            reject(new Error("error"));
+            reject(new Error('error'));
           }
         });
     });

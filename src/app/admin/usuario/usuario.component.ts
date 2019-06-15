@@ -29,7 +29,7 @@ export class UsuarioComponent implements OnInit {
   @Input() private eliminarProducto: boolean;
   @Input() private nuevoUsuario: boolean;
   @Output() private creacionCancelada = new EventEmitter<boolean>(false);
-  @Output() private cargarProductos = new EventEmitter<boolean>(false);
+  @Output() private recargarUsuarios = new EventEmitter<boolean>(false);
   @Output() private edicionCancelada = new EventEmitter<boolean>(false);
 
 
@@ -97,7 +97,9 @@ export class UsuarioComponent implements OnInit {
           .then((res: Respuesta) => {
             if (res.getCode() != null) {
               console.log(res.toObject().mensaje);
-              this.toastr.success('Conexion exitosa', 'success');
+              this.toastr.success('Usuario almacenado', 'Éxito');
+              this.recargarUsuarios.emit(false);
+              this.creacionCancelada.emit(false);
             }
           })
           .catch((err: ServiceError) => {
@@ -120,7 +122,9 @@ export class UsuarioComponent implements OnInit {
           .then((res: Respuesta) => {
             if (res.getCode() != null) {
               console.log(res.toObject().mensaje);
-              this.toastr.success('Conexion exitosa', 'success');
+              this.toastr.success('Usuario almacenado', 'Éxito');
+              this.recargarUsuarios.emit(false);
+              this.creacionCancelada.emit(false);
             }
           })
           .catch((err: ServiceError) => {
@@ -137,7 +141,7 @@ export class UsuarioComponent implements OnInit {
   }
 
   public cancelarEdicion() {
-    if (!isNullOrUndefined(this.usuarioTemp.idUsuario)) {
+    if (!this.nuevoUsuario) {
       this.habilitaCampos = false;
       this.ngOnInit();
       this.edicionCancelada.emit(false);
