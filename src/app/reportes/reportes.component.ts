@@ -52,6 +52,7 @@ export class ReportesComponent implements OnInit {
     await this.reporteService.obtenerReportes()
       .then((res: ListaReportes) => {
         if (res.getReportesList() != null) {
+          console.log(res);
           res.getReportesList().forEach(element => {
             const dummy: ReporteData = {
               idReporte: element.getIdreporte(),
@@ -115,32 +116,32 @@ export class ReportesComponent implements OnInit {
   //   });
   //}
 
-  async dictaminarReporteUnificado() {
-    let dictamen: DictamenUnificado = new DictamenUnificado();
-    let usuario: Usuario = this.loginService.getCurrentUser();
-    let idReportes: number[] = [];
-    idReportes.push(this.reportes[0].idReporte);
-    idReportes.push(this.reportes[1].idReporte);
-    dictamen.setHora(this.reportes[0].hora.toString());
-    dictamen.setIdreporteList(idReportes);
-    dictamen.setIdsiniestro(this.reportes[0].idSiniestro);
-    dictamen.setIdusuario(usuario.getIdusuario());
-    dictamen.setDictamen("Ambos puñetas se mamaron");
-    await this.reporteService.dictaminarReporteUnificado(dictamen)
-      .then((res: Respuesta) => {
-        if (res.getCode() == 1) {
-          this.toastr.success(res.getMensaje(), "success");
-        } else if (res.getCode() != 99) {
-          this.toastr.error(res.getMensaje(), "error")
-        } else {
-          this.toastr.error("Datos incorrectos", "error");
-        }
-      })
-      .catch((err) => {
-        this.toastr.error(err.message.toString(), "Error de conexión");
-        console.log(err);
-      });
-  }
+  //async dictaminarReporteUnificado() {
+  //  let dictamen: DictamenUnificado = new DictamenUnificado();
+  //  let usuario: Usuario = this.loginService.getCurrentUser();
+  //  let idReportes: number[] = [];
+  //  idReportes.push(this.reportes[0].idReporte);
+  //  idReportes.push(this.reportes[1].idReporte);
+  //  dictamen.setHora(this.reportes[0].hora.toString());
+  //  dictamen.setIdreporteList(idReportes);
+  //  dictamen.setIdsiniestro(this.reportes[0].idSiniestro);
+  //  dictamen.setIdusuario(usuario.getIdusuario());
+  //  dictamen.setDictamen("Ambos puñetas se mamaron");
+  //  await this.reporteService.dictaminarReporteUnificado(dictamen)
+  //    .then((res: Respuesta) => {
+  //      if (res.getCode() == 1) {
+  //        this.toastr.success(res.getMensaje(), "success");
+  //      } else if (res.getCode() != 99) {
+  //        this.toastr.error(res.getMensaje(), "error")
+  //      } else {
+  //        this.toastr.error("Datos incorrectos", "error");
+  //      }
+  //    })
+  //    .catch((err) => {
+  //      this.toastr.error(err.message.toString(), "Error de conexión");
+  //      console.log(err);
+  //    });
+  //}
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {

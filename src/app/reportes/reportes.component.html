@@ -68,7 +68,7 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
     <td mat-cell *matCellDef="let element">
       <mat-chip-list>
-        <mat-chip color="primary" selected *ngIf="element.estado === 1">
+        <mat-chip color="primary" selected *ngIf="element.estado === 2">
           Dictaminado
         </mat-chip>
         <mat-chip color="accent" selected *ngIf="element.estado === 0">

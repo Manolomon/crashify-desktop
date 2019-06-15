@@ -72,16 +72,4 @@ export class ReporteService {
     });
   }
 
-  dictaminarReporteUnificado(dictamen: DictamenUnificado) {
-    return new Promise((resolve, reject) => {
-      this.client.dictaminarReporteUnificado(dictamen, (err, respuesta) => {
-        if (respuesta != null) {
-          resolve(respuesta);
-        } else {
-          reject(err);
-        }
-      });
-    });
-  }
-
 }
