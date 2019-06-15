@@ -23,15 +23,7 @@ export class ReporteComponent implements OnInit {
   private imageObject: Array<object> = [
     {
       // tslint:disable-next-line: max-line-length
-      thumbImage: 'https://images.unsplash.com/photo-1558981852-426c6c22a060?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
-    },
-    {
-      // tslint:disable-next-line: max-line-length
-      thumbImage: 'https://images.unsplash.com/photo-1560382797-66b2d275cb56?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
-    },
-    {
-      // tslint:disable-next-line: max-line-length
-      thumbImage: 'https://images.unsplash.com/photo-1543393716-375f47996a77?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
+      thumbImage: 'https://blogs.uao.es/sociedad-debate/wp-content/uploads/sites/4/2014/05/image.png'
     }
   ];
 
@@ -43,20 +35,21 @@ export class ReporteComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    let fotosReporte: Array<Foto> = [];
+    const fotosReporte: Array<object> = [];
     await this.reporteService.obtenerFotosReporte(1)
       .then((fotos: Array<Foto>) => {
         console.log(fotos);
         fotos.forEach((foto) => {
-          console.log(foto.getFoto_asU8());
-          fotosReporte.push(foto);
+          const loadedImage = 'data:image/jpeg;base64,' + foto.getFoto_asB64();
+          fotosReporte.push({
+            thumbImage: loadedImage
+          });
         });
       })
       .catch((err) => {
         console.log(err);
       });
-    this.fotos = fotosReporte;
-    console.log("salchichas con queso", this.fotos.length);
+    this.imageObject = fotosReporte;
   }
 
   onNoClick(): void {
