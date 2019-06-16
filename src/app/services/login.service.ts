@@ -13,7 +13,7 @@ export class LoginService {
   private client: TransitoClient;
   private usuario: Usuario = new Usuario();
   constructor() {
-    this.client = new TransitoClient('http://localhost:8080', null);
+    this.client = new TransitoClient('http://23.99.199.128:8080', null);
   }
 
   iniciarSesion(email: string, password: string) {
@@ -22,7 +22,7 @@ export class LoginService {
     sesion.setUsuario(email);
     sesion.setPassword(sha256.sha256(password));
 
-    console.log("Comienza inicio de sesión")
+    console.log('Comienza inicio de sesión')
 
     return new Promise((resolve, reject) => {
       this.client.iniciarSesion(sesion, (err, usuario: Usuario) => {
@@ -37,7 +37,7 @@ export class LoginService {
   }
 
   getCurrentUser() {
-    let usuarioObjeto = JSON.parse(sessionStorage.getItem("usuario"));
+    const usuarioObjeto = JSON.parse(sessionStorage.getItem('usuario'));
     this.usuario.setIdsuperior(usuarioObjeto.idsuperior);
     this.usuario.setIdusuario(usuarioObjeto.idusuario);
     this.usuario.setNombre(usuarioObjeto.nombre);
@@ -48,11 +48,11 @@ export class LoginService {
   }
 
   isLogged() {
-    return JSON.parse(sessionStorage.getItem("usuario")) != null;
+    return JSON.parse(sessionStorage.getItem('usuario')) != null;
   }
 
   cerrarSesion() {
-    sessionStorage.removeItem("usuario");
+    sessionStorage.removeItem('usuario');
   }
 
 }

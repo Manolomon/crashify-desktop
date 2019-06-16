@@ -13,7 +13,7 @@ export class ReporteService {
 
   private client: TransitoClient;
   constructor() {
-    this.client = new TransitoClient('http://localhost:8080', null);
+    this.client = new TransitoClient('http://23.99.199.128:8080', null);
   }
 
   obtenerReportes() {
