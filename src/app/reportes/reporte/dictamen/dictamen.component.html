@@ -1,7 +1,10 @@
-<form novalidate [formGroup]="DictamenForm" (ngSubmit)="onGuardarDictamen(formNew)" #formNew="ngForm" fxLayout="column">
-  <div fxLayout="row" fxLayoutAlign="end center">
+<form novalidate [formGroup]="dictamenForm" (ngSubmit)="onGuardarDictamen(formNew)" #formNew="ngForm" fxLayout="column">
+  <mat-form-field>
+    <textarea formControlName="veredictoControl" [(ngModel)]="veredicto" name="editorial" matInput placeholder="Veredicto"></textarea>
+  </mat-form-field>
+  <div *ngIf="reporteResumido.estado === 1" fxLayout="row" fxLayoutAlign="end center">
     <div class="example-button-row">
-      <button type="button" mat-stroked-button color="primary" (click)="cancelarEdicion()">Cancelar</button>
+      <button type="button" mat-stroked-button color="primary" (click)="cancelarDictamen()">Cancelar</button>
       <button type="submit" mat-raised-button color="primary" [disabled]="dictamenForm.disabled">Guardar</button>
     </div>
   </div>

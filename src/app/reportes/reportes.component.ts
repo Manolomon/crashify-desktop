@@ -217,7 +217,6 @@ export class ReportesComponent implements OnInit {
     let diferentes = false;
     this.selection.selected.forEach(element => {
       if (element.idSiniestro !== id) {
-        console.log('Hey');
         diferentes = true;
         return;
       }

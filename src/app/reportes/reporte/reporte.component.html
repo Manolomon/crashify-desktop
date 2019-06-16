@@ -30,7 +30,7 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Dictamen</ng-template>
-      <app-dictamen></app-dictamen>
+      <app-dictamen [reporteResumido]="data.firstData" [stepper]="stepper"></app-dictamen>
     </mat-step>
   </mat-horizontal-stepper>
 </div>

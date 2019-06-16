@@ -38,7 +38,6 @@ export class LoginService {
 
   getCurrentUser() {
     let usuarioObjeto = JSON.parse(sessionStorage.getItem("usuario"));
-    console.log(usuarioObjeto);
     this.usuario.setIdsuperior(usuarioObjeto.idsuperior);
     this.usuario.setIdusuario(usuarioObjeto.idusuario);
     this.usuario.setNombre(usuarioObjeto.nombre);
