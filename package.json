@@ -2,7 +2,7 @@
   "name": "crashify-desktop",
   "productName": "Crashify Desktop",
   "description": "Aplicación de escritorio para la revisión de reportes de accidentes de tránsito",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "repository": "github:Manolomon/crashify-desktop",
   "license": "MIT",
   "main": "electron/dist/main.js",
@@ -14,9 +14,12 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "electron": "ng build --base-href ./ && tsc --p electron && electron .",
-    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/ic_launcher.icns --prune=true --out=builds",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=dist/assets/icons/ic_launcher.icns --prune=true --out=builds",
     "package-win": "electron-packager . crashify-desktop --overwrite --asar=true --platform=win32 --arch=x64 --prune=true --out=builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"test\"",
-    "package-linux": "electron-packager . crashify-desktop --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/mipmap-xxhdpi/ic_launcher.png --prune=true --out=builds"
+    "package-linux": "electron-packager . crashify-desktop --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/mipmap-xxhdpi/ic_launcher.png --prune=true --out=builds",
+    "create-installer-debian": "electron-installer-debian --src builds/crashify-desktop-linux-x64/ --arch amd64 --config electron/debian.json",
+    "create-installer-win": "node electron/createinstaller.js",
+    "create-installer-mac": "electron-installer-dmg ./builds/Arpa\\ Desktop-darwin-x64/Arpa\\ Desktop.app arpa-desktop-app --out=builds --overwrite --icon=assets/icons/ic_launcher.icns"
   },
   "private": true,
   "dependencies": {
@@ -35,6 +38,7 @@
     "@types/google-protobuf": "^3.2.7",
     "angular-notifier": "^4.1.1",
     "core-js": "^2.5.4",
+    "electron-installer-debian": "^2.0.0",
     "google-protobuf": "^3.8.0",
     "grpc": "^1.21.1",
     "grpc-web": "^1.0.4",

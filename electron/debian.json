@@ -1,0 +1,10 @@
+{
+    "dest": "builds/",
+    "icon": "dist/assets/icons/mipmap-xxhdpi/ic_launcher.png",
+    "categories": [
+      "Academic"
+    ],
+    "lintianOverrides": [
+      "changelog-file-missing-in-native-package"
+    ]
+  }
