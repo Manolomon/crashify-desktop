@@ -1,6 +1,8 @@
+![Server Status](https://img.shields.io/badge/The%20server%20is-DOWN-red.svg?style=for-the-badge&logo=microsoft-azure&logoColor=white) ![Database Status](https://img.shields.io/badge/The%20database%20is-DOWN-red.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
+
 # Crashify Desktop
 
-[![Docker-Badge](https://img.shields.io/docker/cloud/build/manolomon/crashify-proxy.svg?logo=docker&logoColor=white&style=for-the-badge)](https://hub.docker.com/r/manolomon/crashify-proxy)
+![GitHub last commit](https://img.shields.io/github/last-commit/Manolomon/crashify-desktop.svg?style=for-the-badge) [![Docker-Badge](https://img.shields.io/docker/cloud/build/manolomon/crashify-proxy.svg?logo=docker&logoColor=white&style=for-the-badge)](https://hub.docker.com/r/manolomon/crashify-proxy) ![GitHub repo size](https://img.shields.io/github/repo-size/Manolomon/crashify-desktop.svg?logo=github&style=for-the-badge) ![GitHub](https://img.shields.io/github/license/Manolomon/crashify-desktop.svg?color=red&style=for-the-badge) ![GitHub release](https://img.shields.io/github/release/Manolomon/crashify-desktop.svg?color=yellow&style=for-the-badge)
 
 Aplicación de escritorio para la recepción de reportes de accidentes de tránsito para la experiencia educativa Desarrollo de Sistemas en Red
 
@@ -19,19 +21,7 @@ Más información:
 **Primera ejecución**
 
 ```bash
-docker run -d --name crashify-proxy -p 8080:8080 --net=host manolomon/crashify-proxy
-```
-
-**Detener**
-
-```bash
-docker stop crashify-proxy
-```
-
-**Reiniciar**
-
-```bash
-docker restart crashify-proxy
+sh setup.sh
 ```
 
 ## Generación de gRPC Stubs
@@ -39,7 +29,7 @@ docker restart crashify-proxy
 Ejecutar script `proto_gen.sh` que automáticamente actualiza el submódulo del servidor, donde se encuentra la definición del API. Se generan stubs para `grpc-web` en `javascript` y `typescript` que se econtrarán en la carpeta `src/app/lib`
 
 ```bash
-sh proto_gen.sh
+sh update.sh
 ```
 
 ## Ejecutar Cliente en Angular
